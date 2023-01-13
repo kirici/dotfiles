@@ -1,0 +1,13 @@
+{
+    "terminal.integrated.fontFamily": "source code pro",
+    "redhat.telemetry.enabled": false,
+    "telemetry.telemetryLevel": "off",
+    "window.titleBarStyle": "custom",
+    "editor.minimap.renderCharacters": false,
+    "yaml.schemas": {
+        "https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json": ".gitlab-ci.yml"
+    },
+    "git.confirmSync": false,
+    "terminal.integrated.minimumContrastRatio": 1,
+    "explorer.confirmDragAndDrop": false,
+}

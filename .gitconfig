@@ -1,0 +1,18 @@
+[user]
+	email = krcdotbrk@gmail.com
+	name = C. Burak KIRICI
+	signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKGfNIoEgmbMbHUi7phk3OZfwqlk3BuJBpYZ9ifsLi51 brk@fedora
+[fetch]
+	prune = true
+[core]
+	pager = bat -p
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[gpg "ssh"]
+	allowedSignersFile = /home/brk/.config/git/allowed_signers
+[init]
+	defaultBranch = master
