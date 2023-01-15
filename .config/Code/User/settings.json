@@ -10,4 +10,5 @@
     "git.confirmSync": false,
     "terminal.integrated.minimumContrastRatio": 1,
     "explorer.confirmDragAndDrop": false,
+    // Explorer's width is equal to a filename of 55 'I's (untracked file).
 }
