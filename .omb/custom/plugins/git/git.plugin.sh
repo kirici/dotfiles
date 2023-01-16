@@ -69,9 +69,8 @@ alias gcf='git config --list'
 alias gcl='git clone --recursive'
 alias gclean='git clean -fd'
 alias gpristine='git reset --hard && git clean -dfx'
-alias gcm='git checkout master'
-alias gcd='git checkout develop'
-alias gcmsg='git commit -S -m'
+alias gcm='git commit -S'
+
 alias gco='git checkout'
 alias gcount='git shortlog -sn'
 #compdef _git gcount complete -F _git gcount

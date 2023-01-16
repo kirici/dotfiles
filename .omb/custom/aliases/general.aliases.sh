@@ -62,5 +62,5 @@ alias fix_term='echo -e "\033c"'            # fix_term:     Reset the console.  
 alias cic='bind "set completion-ignore-case on"' # cic:          Make tab-completion case-insensitive
 alias src='source ~/.bashrc'                # src:          Reload .bashrc file
 
-alias cat='batcat -pp'
+alias cat='bat -pp'
 alias cohe='code . &exit'
