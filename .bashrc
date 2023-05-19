@@ -129,10 +129,15 @@ source "$OSH"/oh-my-bash.sh
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 alias d=docker
-alias dpsa="docker ps -a"
+alias dpsa='docker ps -a'
 alias dpsaft='docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
+alias ppsaft='podman ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
 
 # PATH extensions
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.local/bin
+
+# k8s autocomplete
+alias k=kubectl
+complete -o default -F __start_kubectl k

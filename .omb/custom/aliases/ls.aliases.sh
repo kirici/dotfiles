@@ -4,8 +4,8 @@
 # Directory Listing aliases
 alias dir='ls -hFx'
 alias l.='ls -d .* --color=tty' # short listing, only hidden files - .*
-alias l='ls -Fghot --group-directories-first'    # Preferred
-alias la='ls -FAghot --group-directories-first'    # Preferred
+alias l='ls -FAghot --group-directories-first'    # Preferred
+# alias la='ls -FAghot --group-directories-first'    # Preferred
 alias L='ls -latrhF'            # long, sort by oldest to newest
 alias lc='ls -lcr'              # sort by change time
 alias lk='ls -lSr'              # sort by size
