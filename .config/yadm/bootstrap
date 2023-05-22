@@ -14,33 +14,43 @@ ERROR() {
 }
 
 main() {
-    id="$(id -u)"
+    USERID="$(id -u)"
     # verify root status
-	if [ ! "$id" = "0" ]; then
+	if [ ! "$USERID" = "0" ]; then
 		ERROR "This bootstrap script needs to be run as root."
 		exit 1
 	fi
     # dnf config
-    echo -e "max_parallel_downloads=16\nassumeyes=True\nfastestmirror=True" | tee -a /etc/dnf/dnf.conf
+    if ! grep -qF "assumeyes" /etc/dnf/dnf.conf; then
+		INFO "Configuring dnf."
+        printf "max_parallel_downloads=16\nassumeyes=True\nfastestmirror=True" | tee -a /etc/dnf/dnf.conf
+	fi
     # rpmfusion repos
+    INFO "Setting up rpmfusion repos."
     dnf config-manager --set-enabled crb
     dnf install -y epel-release
     dnf install -y https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-"$(rpm -E %rhel)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-"$(rpm -E %rhel)".noarch.rpm
     dnf groupupdate core -y
     # flathub, gnome extensions
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo -y
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     flatpak install org.gnome.Extensions -y
     # oh-my-bash
-    curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh | bash
+    if [ ! -d "$HOME/.oh-my-bash" ]; then
+        INFO "Downloading oh-my-bash."
+        curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh | bash
+    fi
     # micro editor
-    curl https://getmic.ro | bash && sudo mv ./micro /usr/bin
+    if [ ! -x "$(command -v micro)" ]; then
+        INFO "Installing micro text editor."
+        curl https://getmic.ro | bash && sudo mv ./micro /usr/bin
+    fi
     # various
     dnf install -y gnome-tweaks gnome-shell-extension-workspace-indicator \
         bat \
+        tmux \
         ncdu \
         golang \
-        python3-pip \
-        google-chrome-stable
+        python3-pip
     # go packages
     go install github.com/cheat/cheat/cmd/cheat@latest
     # tmux plugins
@@ -56,14 +66,16 @@ main() {
     if [ -x ~/.tmux/plugins/tpm/bin/update_plugins ]; then
         ~/.tmux/plugins/tpm/bin/update_plugins all
     fi
-    # nerd font
-    mkdir ~/.local/share/fonts
-    (cd ~/.local/share/fonts && curl -fsSLo JetBrainsMonoNerdFontMono-Regular.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFontMono-Regular.ttf)
-    fc-cache ~/.local/share/fonts
-    # yadm init
-    yadm checkout master
+    # Install nerd fonts
+    if [ ! -d "/usr/share/fonts/JetBrainsMono" ]; then
+        INFO "Installing JetBrains Nerd Font."
+        mkdir -p /usr/share/fonts/JetBrainsMono
+        (cd /usr/share/fonts/JetBrainsMono && curl -fsSLo JetBrainsMonoNerdFontMono-Regular.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFontMono-Regular.ttf)
+        fc-cache -fv /usr/share/fonts/JetBrainsMono
+    fi
+    # Check out all dotfiles
+    yadm checkout .
     src
-    clear
 }
 
 main
