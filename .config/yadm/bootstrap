@@ -75,7 +75,7 @@ main() {
     fi
     # Check out all dotfiles
     yadm checkout .
-    src
+    reboot
 }
 
 main
