@@ -1,7 +1,6 @@
 [user]
 	email = krcdotbrk@gmail.com
 	name = C. Burak KIRICI
-	signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGsYBmdO3+r0G+VF4fq9LohE1Oh8F/FgfmHZbJUDWEem brk@fedora
 [fetch]
 	prune = true
 [core]

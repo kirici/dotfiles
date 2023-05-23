@@ -78,6 +78,7 @@ main() {
     # Check out all dotfiles
     INFO "Restoring dotfiles"
     yadm checkout .
+    ssh-key-setup
     reboot
 }
 
@@ -99,6 +100,15 @@ non-root() {
     yadm checkout .
     # shellcheck disable=SC1091
     source "$HOME"/.bashrc
+}
+
+ssh-key-setup() {
+    USER_EMAIL="krcdotbrk@gmail.com"
+    PUB_KEY=$(cat .ssh/id_ed25519.pub)
+    PUB_KEY_SHORT=$(echo "${PUB_KEY}" | awk  '{print $1,$2}')
+    ssh-keygen -t ed25519 -C "${USER_EMAIL}"
+    git config --global user.signingkey "${PUB_KEY}"
+    printf '%s namespaces="git" %s' "${USER_EMAIL}" "${PUB_KEY_SHORT}" | tee -a "$HOME"/.config/git/allowed_signers
 }
 
 main
