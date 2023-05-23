@@ -17,8 +17,10 @@ main() {
     USERID="$(id -u)"
     # verify root status
 	if [ ! "$USERID" = "0" ]; then
-		ERROR "This bootstrap script needs to be run as root."
-		exit 1
+		ERROR "This bootstrap script needs to be run as root for full functionality."
+        INFO "Running non-root steps."
+		non-root
+		exit 0
 	fi
     # dnf config
     if ! grep -qF "assumeyes" /etc/dnf/dnf.conf; then
@@ -32,6 +34,7 @@ main() {
     dnf install -y https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-"$(rpm -E %rhel)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-"$(rpm -E %rhel)".noarch.rpm
     dnf groupupdate core -y
     # flathub, gnome extensions
+    INFO "Adding flathub and the gnome extensions flatpak"
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     flatpak install org.gnome.Extensions -y
     # oh-my-bash
@@ -44,11 +47,17 @@ main() {
         INFO "Installing micro text editor."
         curl https://getmic.ro | bash && sudo mv ./micro /usr/bin
     fi
-    # various
-    dnf install -y gnome-tweaks gnome-shell-extension-workspace-indicator \
-        bat \
-        tmux \
-        ncdu \
+    # various packages where command == pkg name
+    declare -a PKGLIST=("bat" "ncdu" "tmux")
+    for pkg in "${PKGLIST[@]}"; do
+        if [ ! -x "$(command -v "${pkg}")" ]; then
+            INFO "Installing \"${pkg}\"."
+            dnf install -y "${pkg}"
+        fi
+    done
+    # various packages, rest
+    dnf install -y gnome-tweaks \
+        gnome-shell-extension-workspace-indicator \
         golang \
         python3-pip
     # go packages
@@ -56,15 +65,8 @@ main() {
     # tmux plugins
     mkdir -p ~/.tmux/plugins
     if [ ! -d ~/.tmux/plugins/tpm ]; then
+        INFO "Installing the tmux plugin manager"
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    fi
-
-    if [ -x ~/.tmux/plugins/tpm/bin/install_plugins ]; then
-        ~/.tmux/plugins/tpm/bin/install_plugins
-    fi
-
-    if [ -x ~/.tmux/plugins/tpm/bin/update_plugins ]; then
-        ~/.tmux/plugins/tpm/bin/update_plugins all
     fi
     # Install nerd fonts
     if [ ! -d "/usr/share/fonts/JetBrainsMono" ]; then
@@ -74,8 +76,29 @@ main() {
         fc-cache -fv /usr/share/fonts/JetBrainsMono
     fi
     # Check out all dotfiles
+    INFO "Restoring dotfiles"
     yadm checkout .
     reboot
+}
+
+non-root() {
+    # oh-my-bash
+    if [ ! -d "$HOME/.oh-my-bash" ]; then
+        INFO "Downloading oh-my-bash."
+        curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh | bash
+    fi
+    # go packages
+    go install github.com/cheat/cheat/cmd/cheat@latest
+    # tmux plugins
+    mkdir -p ~/.tmux/plugins
+    if [ ! -d ~/.tmux/plugins/tpm ]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
+    # Check out all dotfiles
+    INFO "Restoring dotfiles"
+    yadm checkout .
+    # shellcheck disable=SC1091
+    source "$HOME"/.bashrc
 }
 
 main
