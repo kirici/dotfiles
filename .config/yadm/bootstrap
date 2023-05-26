@@ -14,6 +14,15 @@ ERROR() {
 }
 
 main() {
+    # Check OS/Environment
+    if uname -r | grep -qF "WSL2" ; then
+    INFO "Running Debian@WSL2 setups."
+    wsl-debian
+    fi
+    rhel
+}
+
+rhel() {
     USERID="$(id -u)"
     # verify root status
 	if [ ! "$USERID" = "0" ]; then
@@ -60,8 +69,13 @@ main() {
         gnome-shell-extension-workspace-indicator \
         golang \
         python3-pip
-    # go packages
+    # Go packages
+    INFO "Installing cheatsheet"
     go install github.com/cheat/cheat/cmd/cheat@latest
+    INFO "Installing k9s"
+    go install github.com/derailed/k9s@latest
+    INFO "Installing yq"
+    go install github.com/mikefarah/yq/v4@latest
     # tmux plugins
     mkdir -p ~/.tmux/plugins
     if [ ! -d ~/.tmux/plugins/tpm ]; then
@@ -77,9 +91,89 @@ main() {
     fi
     # Check out all dotfiles
     INFO "Restoring dotfiles"
-    yadm checkout .
+    yadm checkout $HOME
     ssh-key-setup
     reboot
+}
+
+wsl-debian() {
+    export DEBIAN_FRONTEND=noninteractive
+    # verify root status
+    USERID="$(id -u)"
+	if [ ! "$USERID" = "0" ]; then
+		ERROR "This script needs to run as root"
+		exit 1
+	fi
+
+    # apt config
+    if [ -f /etc/apt/apt.conf.d/00InstallRecommends ]; then
+		sudo sed -i '/^APT::Install-Recommends/d' /etc/apt/apt.conf.d/00InstallRecommends;
+		sudo sed -i '/^Aptitude::Recommends-Important/d' /etc/apt/apt.conf.d/00InstallRecommends;
+    fi
+    INFO "apt: disabling install-recommends"
+	printf 'APT::Install-Recommends "false";\n' | sudo tee -a /etc/apt/apt.conf.d/00InstallRecommends &>/dev/null
+	printf 'Aptitude::Recommends-Important "False";\n' | sudo tee -a /etc/apt/apt.conf.d/00InstallRecommends &>/dev/null
+
+    # oh-my-bash
+    if [ ! -d "$HOME/.oh-my-bash" ]; then
+        INFO "Installing oh-my-bash"
+        curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh | bash
+    fi
+
+    # micro editor
+    if [ ! -x "$(command -v micro)" ]; then
+        INFO "Installing micro text editor"
+        curl https://getmic.ro | bash && sudo mv ./micro /usr/bin
+    fi
+
+    # various packages where command equals the package name
+    declare -a PKGLIST=("bat" "ncdu" "tmux")
+    for pkg in "${PKGLIST[@]}"; do
+        if [ ! -x "$(command -v "${pkg}")" ]; then
+            INFO "Installing \"${pkg}\"."
+            apt install -y "${pkg}"
+        fi
+    done
+    # various packages, rest
+    apt install -y python3-pip \
+        fontconfig
+
+    # Golang
+    if [ ! -x "$(command -v go)" ]; then
+        LATEST_GO_VERSION="$(curl --silent https://go.dev/VERSION?m=text)";
+        LATEST_GO_DOWNLOAD_URL="https://golang.org/dl/${LATEST_GO_VERSION}.linux-amd64.tar.gz"
+        INFO "Downloading ${LATEST_GO_VERSION}"
+        curl -OJ -L --progress-bar "${LATEST_GO_DOWNLOAD_URL}"
+        sudo tar -C /usr/local -xzf "${LATEST_GO_VERSION}".linux-amd64.tar.gz
+        export PATH=$PATH:/usr/local/go/bin
+    fi
+
+    # Go packages
+    INFO "Installing cheatsheet"
+    go install github.com/cheat/cheat/cmd/cheat@latest
+    INFO "Installing k9s"
+    go install github.com/derailed/k9s@latest
+    INFO "Installing yq"
+    go install github.com/mikefarah/yq/v4@latest
+
+    # tmux plugins
+    mkdir -p ~/.tmux/plugins
+    if [ ! -d ~/.tmux/plugins/tpm ]; then
+        INFO "Installing the tmux plugin manager"
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
+
+    # Nerd fonts
+    if [ ! -d "/usr/local/share/fonts/JetBrainsMono" ]; then
+        INFO "Installing JetBrains Nerd Font."
+        sudo mkdir -p /usr/local/share/fonts/JetBrainsMono
+        sudo sh -c "cd /usr/local/share/fonts/JetBrainsMono && curl -fsSLo JetBrainsMonoNerdFontMono-Regular.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFontMono-Regular.ttf"
+        sudo fc-cache -fv
+    fi
+    # Check out all dotfiles
+    INFO "Restoring dotfiles"
+    yadm checkout $HOME
+    ssh-key-setup
 }
 
 non-root() {
@@ -88,8 +182,13 @@ non-root() {
         INFO "Downloading oh-my-bash."
         curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh | bash
     fi
-    # go packages
+    # Go packages
+    INFO "Installing cheatsheet"
     go install github.com/cheat/cheat/cmd/cheat@latest
+    INFO "Installing k9s"
+    go install github.com/derailed/k9s@latest
+    INFO "Installing yq"
+    go install github.com/mikefarah/yq/v4@latest
     # tmux plugins
     mkdir -p ~/.tmux/plugins
     if [ ! -d ~/.tmux/plugins/tpm ]; then
@@ -104,11 +203,11 @@ non-root() {
 
 ssh-key-setup() {
     USER_EMAIL="krcdotbrk@gmail.com"
+    ssh-keygen -t ed25519 -C "${USER_EMAIL}" -f $HOME/.ssh/id_ed25519 -q -N ""
     PUB_KEY=$(cat .ssh/id_ed25519.pub)
     PUB_KEY_SHORT=$(echo "${PUB_KEY}" | awk  '{print $1,$2}')
-    ssh-keygen -t ed25519 -C "${USER_EMAIL}"
     git config --global user.signingkey "${PUB_KEY}"
-    printf '%s namespaces="git" %s' "${USER_EMAIL}" "${PUB_KEY_SHORT}" | tee -a "$HOME"/.config/git/allowed_signers
+    printf '%s namespaces="git" %s' "${USER_EMAIL}" "${PUB_KEY_SHORT}" | tee -a "$HOME"/.config/git/allowed_signers &>/dev/null
 }
 
 main
