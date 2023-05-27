@@ -48,5 +48,6 @@ setupKeysSSH() {
 getOhMyBash
 compileGoTools
 getTPM
-setupKeysSSH
 yadm checkout "${HOME}"
+setupKeysSSH
+source "${HOME}"/.bashrc
