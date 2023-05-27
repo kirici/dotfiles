@@ -57,7 +57,7 @@ wsl-debian() {
     fi
 
     # various packages where command equals the package name
-    declare -a PKGLIST=("batcat" "ncdu" "tmux")
+    declare -a PKGLIST=("ncdu" "tmux")
     for pkg in "${PKGLIST[@]}"; do
         if [ ! -x "$(command -v "${pkg}")" ]; then
             INFO "Installing \"${pkg}\"."
@@ -66,7 +66,8 @@ wsl-debian() {
     done
     # various packages, rest
     sudo apt install -y python3-pip \
-        fontconfig
+        fontconfig \
+        bat
 
     # Golang
     if  [ ! -d "/usr/local/go" ]; then
