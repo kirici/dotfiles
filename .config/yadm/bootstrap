@@ -18,8 +18,9 @@ main() {
     if uname -r | grep -qF "WSL2" ; then
     INFO "Running Debian@WSL2 setups."
     wsl-debian
-    fi
+    else
     rhel
+    fi
 }
 
 rhel() {
