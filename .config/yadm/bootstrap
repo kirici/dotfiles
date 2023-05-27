@@ -1,200 +1,52 @@
 #!/usr/bin/env bash
+set -euxo pipefail
 
-# logging functions
 INFO() {
     /bin/echo -e "\e[104m\e[97m[INFO]\e[49m\e[39m ${*}"
 }
-
 WARNING() {
     /bin/echo >&2 -e "\e[101m\e[97m[WARNING]\e[49m\e[39m ${*}"
 }
-
 ERROR() {
     /bin/echo >&2 -e "\e[101m\e[97m[ERROR]\e[49m\e[39m ${*}"
 }
 
-main() {
-    # Check OS/Environment
-    if uname -r | grep -qF "WSL2" ; then
-        INFO "Running Debian@WSL2 setups."
-        wsl-debian
-    else
-    rhel
-    fi
-}
-
-wsl-debian() {
-    export DEBIAN_FRONTEND=noninteractive
-    export USERRUNAS="sudo -u ${SUDO_USER} ${*}"
-    export USERHOME="/home/${SUDO_USER}"
-
-    # verify root status
-    USERID="$(id -u)"
-    if [ ! "$USERID" = "0" ]; then
-        ERROR "This script needs to run as root"
-        exit 1
-    fi
-
-    # apt config
-    if [ -f /etc/apt/apt.conf.d/00InstallRecommends ]; then
-        sudo sed -i '/^APT::Install-Recommends/d' /etc/apt/apt.conf.d/00InstallRecommends;
-        sudo sed -i '/^Aptitude::Recommends-Important/d' /etc/apt/apt.conf.d/00InstallRecommends;
-    fi
-    INFO "apt: disabling install-recommends"
-    printf 'APT::Install-Recommends "false";\n' | sudo tee -a /etc/apt/apt.conf.d/00InstallRecommends &>/dev/null
-    printf 'Aptitude::Recommends-Important "False";\n' | sudo tee -a /etc/apt/apt.conf.d/00InstallRecommends &>/dev/null
-
-    # oh-my-bash
-    if [ ! -d "${USERHOME}/.oh-my-bash" ]; then
-        INFO "Installing oh-my-bash"
-        curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh | "${USERRUNAS}" bash
-    fi
-
-    # micro editor
-    if [ ! -x "$(command -v micro)" ]; then
-        INFO "Installing micro text editor"
-        curl https://getmic.ro | bash && sudo mv ./micro /usr/bin
-    fi
-
-    # various packages where command equals the package name
-    declare -a PKGLIST=("ncdu" "tmux")
-    for pkg in "${PKGLIST[@]}"; do
-        if [ ! -x "$(command -v "${pkg}")" ]; then
-            INFO "Installing \"${pkg}\"."
-            sudo apt install -y "${pkg}"
-        fi
-    done
-    # various packages, rest
-    sudo apt install -y python3-pip \
-        fontconfig \
-        bat
-
-    # Golang
-    if  [ ! -d "/usr/local/go" ]; then
-        INFO "Installing the latest Golang release"
-        LATEST_GO_VERSION="$(curl --silent https://go.dev/VERSION?m=text)";
-        LATEST_GO_DOWNLOAD_URL="https://golang.org/dl/${LATEST_GO_VERSION}.linux-amd64.tar.gz"
-        INFO "Downloading ${LATEST_GO_VERSION}"
-        sudo curl -OJ -L --progress-bar "${LATEST_GO_DOWNLOAD_URL}"
-        sudo tar -C /usr/local -xzf "${LATEST_GO_VERSION}".linux-amd64.tar.gz
-        export PATH=$PATH:/usr/local/go/bin
-    fi
-
-    # Go packages
-    INFO "Installing cheatsheet"
-    go install github.com/cheat/cheat/cmd/cheat@latest
-    INFO "Installing k9s"
-    go install github.com/derailed/k9s@latest
-    INFO "Installing yq"
-    go install github.com/mikefarah/yq/v4@latest
-
-    # tmux plugins
-    mkdir -p ~/.tmux/plugins
-    if [ ! -d ~/.tmux/plugins/tpm ]; then
-        INFO "Installing the tmux plugin manager"
-        git clone https://github.com/tmux-plugins/tpm "${USERHOME}"/.tmux/plugins/tpm
-    fi
-
-    # Nerd fonts
-    if [ ! -d "/usr/local/share/fonts/JetBrainsMono" ]; then
-        INFO "Installing JetBrains Nerd Font."
-        sudo mkdir -p /usr/local/share/fonts/JetBrainsMono
-        sudo sh -c "cd /usr/local/share/fonts/JetBrainsMono && curl -fsSLo JetBrainsMonoNerdFontMono-Regular.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFontMono-Regular.ttf"
-        sudo fc-cache -fv
-    fi
-    # Check out all dotfiles
-    INFO "Restoring dotfiles"
-    yadm checkout "${USERHOME}"
-    echo "alias bat=batcat" | tee -a "${USERHOME}"/.bashrc &>/dev/null
-    ssh-key-setup
-}
-
-ssh-key-setup() {
-    INFO "Generating ssh key pair and adding it to .gitconfig"
-    USER_EMAIL="krcdotbrk@gmail.com"
-    $USERRUNAS ssh-keygen -t ed25519 -C "${USER_EMAIL}" -f "${USERHOME}"/.ssh/id_ed25519 -q -N ""
-    PUB_KEY=$(cat "${USERHOME}"/.ssh/id_ed25519.pub)
-    PUB_KEY_SHORT=$(echo "${PUB_KEY}" | awk  '{print $1,$2}')
-    $USERRUNAS git config --global user.signingkey "${PUB_KEY}"
-    if [ -f "${USERHOME}"/.config/git/allowed_signers ]; then
-        rm "${USERHOME}"/.config/git/allowed_signers
-    fi
-    printf '%s namespaces="git" %s' "${USER_EMAIL}" "${PUB_KEY_SHORT}" | $USERRUNAS tee -a "${USERHOME}"/.config/git/allowed_signers &>/dev/null
-}
-
-# TODO: Rewrite to handle user and system setups, see wsl-debian()
-rhel() {
-    USERID="$(id -u)"
-    # verify root status
-	if [ ! "$USERID" = "0" ]; then
-		ERROR "This bootstrap script needs to be run as root for full functionality."
-        INFO "Running non-root steps."
-		non-root
-		exit 0
-	fi
-    # dnf config
-    if ! grep -qF "assumeyes" /etc/dnf/dnf.conf; then
-		INFO "Configuring dnf."
-        printf "max_parallel_downloads=16\nassumeyes=True\nfastestmirror=True" | tee -a /etc/dnf/dnf.conf
-	fi
-    # rpmfusion repos
-    INFO "Setting up rpmfusion repos."
-    dnf config-manager --set-enabled crb
-    dnf install -y epel-release
-    dnf install -y https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-"$(rpm -E %rhel)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-"$(rpm -E %rhel)".noarch.rpm
-    dnf groupupdate core -y
-    # flathub, gnome extensions
-    INFO "Adding flathub and the gnome extensions flatpak"
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    flatpak install org.gnome.Extensions -y
-    # oh-my-bash
-    if [ ! -d "$HOME/.oh-my-bash" ]; then
-        INFO "Downloading oh-my-bash."
+getOhMyBash() {
+    if [ ! -d "${HOME}/.oh-my-bash" ]; then
+        INFO "Installing Oh-My-Bash"
         curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh | bash
     fi
-    # micro editor
-    if [ ! -x "$(command -v micro)" ]; then
-        INFO "Installing micro text editor."
-        curl https://getmic.ro | bash && sudo mv ./micro /usr/bin
-    fi
-    # various packages where command == pkg name
-    declare -a PKGLIST=("bat" "ncdu" "tmux")
-    for pkg in "${PKGLIST[@]}"; do
-        if [ ! -x "$(command -v "${pkg}")" ]; then
-            INFO "Installing \"${pkg}\"."
-            dnf install -y "${pkg}"
-        fi
-    done
-    # various packages, rest
-    dnf install -y gnome-tweaks \
-        gnome-shell-extension-workspace-indicator \
-        golang \
-        python3-pip
-    # Go packages
-    INFO "Installing cheatsheet"
+}
+compileGoTools() {
+    INFO "Compiling cheatsheet"
     go install github.com/cheat/cheat/cmd/cheat@latest
-    INFO "Installing k9s"
+    INFO "Compiling k9s"
     go install github.com/derailed/k9s@latest
-    INFO "Installing yq"
+    INFO "Compiling yq"
     go install github.com/mikefarah/yq/v4@latest
-    # tmux plugins
+}
+getTPM() {
     mkdir -p ~/.tmux/plugins
     if [ ! -d ~/.tmux/plugins/tpm ]; then
-        INFO "Installing the tmux plugin manager"
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+        INFO "Installing tmux plugin manager"
+        git clone https://github.com/tmux-plugins/tpm "${HOME}"/.tmux/plugins/tpm
     fi
-    # Install nerd fonts
-    if [ ! -d "/usr/share/fonts/JetBrainsMono" ]; then
-        INFO "Installing JetBrains Nerd Font."
-        mkdir -p /usr/share/fonts/JetBrainsMono
-        (cd /usr/share/fonts/JetBrainsMono && curl -fsSLo JetBrainsMonoNerdFontMono-Regular.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFontMono-Regular.ttf)
-        fc-cache -fv /usr/share/fonts/JetBrainsMono
+}
+setupKeysSSH() {
+    INFO "Setting up SSH keys"
+    USER_EMAIL="krcdotbrk@gmail.com"
+    ssh-keygen -t ed25519 -C "${USER_EMAIL}" -f "${HOME}"/.ssh/id_ed25519 -q -N ""
+    PUB_KEY=$(cat "${HOME}"/.ssh/id_ed25519.pub)
+    PUB_KEY_SHORT=$(echo "${PUB_KEY}" | awk  '{print $1,$2}')
+    git config --global user.signingkey "${PUB_KEY}"
+    if [ -f "${HOME}"/.config/git/allowed_signers ]; then
+        rm "${HOME}"/.config/git/allowed_signers
     fi
-    # Check out all dotfiles
-    INFO "Restoring dotfiles"
-    yadm checkout $HOME
-    ssh-key-setup
-    reboot
+    printf '%s namespaces="git" %s' "${USER_EMAIL}" "${PUB_KEY_SHORT}" | tee -a "${HOME}"/.config/git/allowed_signers &>/dev/null
 }
 
-main
+getOhMyBash
+compileGoTools
+getTPM
+setupKeysSSH
+yadm checkout "${HOME}"
