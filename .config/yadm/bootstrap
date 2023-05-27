@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euxo pipefail
+set -euo pipefail
 
 INFO() {
     /bin/echo -e "\e[104m\e[97m[INFO]\e[49m\e[39m ${*}"
