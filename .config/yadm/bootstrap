@@ -116,7 +116,7 @@ ssh-key-setup() {
     PUB_KEY=$(cat "${USERHOME}"/.ssh/id_ed25519.pub)
     PUB_KEY_SHORT=$(echo "${PUB_KEY}" | awk  '{print $1,$2}')
     $USERRUNAS git config --global user.signingkey "${PUB_KEY}"
-    if [ -f "${USERHOME}"/.config/git/allowed_signers]; then
+    if [ -f "${USERHOME}"/.config/git/allowed_signers ]; then
         rm "${USERHOME}"/.config/git/allowed_signers
     fi
     printf '%s namespaces="git" %s' "${USER_EMAIL}" "${PUB_KEY_SHORT}" | $USERRUNAS tee -a "${USERHOME}"/.config/git/allowed_signers &>/dev/null
