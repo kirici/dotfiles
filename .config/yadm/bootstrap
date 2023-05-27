@@ -196,3 +196,5 @@ rhel() {
     ssh-key-setup
     reboot
 }
+
+main
