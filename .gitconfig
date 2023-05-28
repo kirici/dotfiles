@@ -11,7 +11,5 @@
 	gpgsign = true
 [tag]
 	gpgsign = true
-[gpg "ssh"]
-	allowedSignersFile = /home/brk/.config/git/allowed_signers
 [init]
 	defaultBranch = master
