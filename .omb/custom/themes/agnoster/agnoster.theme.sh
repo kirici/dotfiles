@@ -231,14 +231,14 @@ prompt_context() {
 
     if [[ $user != $DEFAULT_USER || -n $SSH_CLIENT ]]; then
         # prompt_segment black default "$user@\h"
-        prompt_segment black default "$user"
+        prompt_segment cyan black "$user"
     fi
 }
 
 # prints history followed by HH:MM, useful for remembering what
 # we did previously
 prompt_histdt() {
-    prompt_segment black default "\! [\A]"
+    prompt_segment blue black "\! [\A]"
 }
 
 
@@ -279,7 +279,7 @@ prompt_status() {
     [[ $UID -eq 0 ]] && symbols+="$(ansi_single $(fg_color yellow))🌊"
     [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="$(ansi_single $(fg_color cyan))⚙"
 
-    [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
+    [[ -n "$symbols" ]] && prompt_segment blue black "$symbols"
 }
 
 ######################################################################
