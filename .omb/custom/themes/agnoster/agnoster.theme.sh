@@ -231,7 +231,7 @@ prompt_context() {
 
     if [[ $user != $DEFAULT_USER || -n $SSH_CLIENT ]]; then
         # prompt_segment black default "$user@\h"
-        prompt_segment cyan black "$user"
+        prompt_segment blue black "$user"
     fi
 }
 
@@ -265,7 +265,7 @@ prompt_git() {
 
 # Dir: current working directory
 prompt_dir() {
-    prompt_segment blue black '\w'
+    prompt_segment cyan black '\w'
 }
 
 # Status:
