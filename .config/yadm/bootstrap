@@ -26,11 +26,17 @@ compileGoTools() {
     go install github.com/mikefarah/yq/v4@latest
 }
 getTPM() {
-    mkdir -p ~/.tmux/plugins
-    if [ ! -d ~/.tmux/plugins/tpm ]; then
+    mkdir -p "${HOME}"/.tmux/plugins
+    if [ ! -d "${HOME}/.tmux/plugins/tpm" ]; then
         INFO "Installing tmux plugin manager"
         git clone https://github.com/tmux-plugins/tpm "${HOME}"/.tmux/plugins/tpm
     fi
+}
+configNvim() {
+    mkdir -p "${HOME}"/.config/nvim
+    ln -s "${HOME}"/.vimrc "${HOME}"/.config/nvim/init.vim
+    git clone https://github.com/VundleVim/Vundle.vim.git "${HOME}"/.vim/bundle/Vundle.vim
+    nvim +PluginInstall +qall
 }
 yadmInit() {
     yadm checkout "${HOME}"
@@ -67,6 +73,7 @@ yadmLocalKeys() {
 getOhMyBash
 compileGoTools
 getTPM
+configNvim
 yadmInit
 loadDconf
 setupKeysSSH
