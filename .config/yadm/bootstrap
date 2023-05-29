@@ -32,11 +32,17 @@ getTPM() {
         git clone https://github.com/tmux-plugins/tpm "${HOME}"/.tmux/plugins/tpm
     fi
 }
+yadmInit() {
+    yadm checkout "${HOME}"
+    yadm switch -c "local"
+    yadm branch --set-upstream-to=origin/master
+}
 setupKeysSSH() {
     INFO "Setting up SSH keys"
     USER_EMAIL="krcdotbrk@gmail.com"
-    ssh-keygen -t ed25519 -C "${USER_EMAIL}" -f "${HOME}"/.ssh/id_ed25519 -q -N ""
-    PUB_KEY=$(cat "${HOME}"/.ssh/id_ed25519.pub)
+    KEY_LOC="${HOME}"/.ssh/id_ed25519
+    ssh-keygen -t ed25519 -C "${USER_EMAIL}" -f "${KEY_LOC}" -q -N ""
+    PUB_KEY=$(cat "${KEY_LOC}".pub)
     PUB_KEY_SHORT=$(echo "${PUB_KEY}" | awk  '{print $1,$2}')
     git config --global user.signingkey "${PUB_KEY}"
     git config --global gpg.ssh.allowedSignersFile "${HOME}/.config/git/allowed_signers"
@@ -45,10 +51,17 @@ setupKeysSSH() {
     fi
     printf '%s namespaces="git" %s' "${USER_EMAIL}" "${PUB_KEY_SHORT}" | tee -a "${HOME}"/.config/git/allowed_signers &>/dev/null
 }
+yadmLocalKeys() {
+    eval "$(ssh-agent -s)"
+    ssh-add "${KEY_LOC}"
+    yadm add "${HOME}"/.config/git/allowed_signers "${HOME}"/.gitconfig
+    yadm commit -S -m "local: set up git signing with SSH keys"
+}
 
 getOhMyBash
 compileGoTools
 getTPM
-yadm checkout "${HOME}"
+yadmInit
 setupKeysSSH
-source "${HOME}"/.bashrc
+yadmLocalKeys
+INFO "Setup complete! Reboot recommended."
