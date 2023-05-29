@@ -37,6 +37,12 @@ yadmInit() {
     yadm switch -c "local"
     yadm branch --set-upstream-to=origin/master
 }
+loadDconf() {
+    if ! grep -qEi "(Microsoft|WSL)" /proc/sys/kernel/osrelease &> /dev/null ; then
+        INFO "Restoring dconf db"
+        dconf load / < "${HOME}"/.config/dconf/dconf.ini
+    fi
+}
 setupKeysSSH() {
     INFO "Setting up SSH keys"
     USER_EMAIL="krcdotbrk@gmail.com"
@@ -62,6 +68,7 @@ getOhMyBash
 compileGoTools
 getTPM
 yadmInit
+loadDconf
 setupKeysSSH
 yadmLocalKeys
 INFO "Setup complete! Reboot recommended."
