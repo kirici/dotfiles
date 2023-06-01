@@ -44,7 +44,7 @@ yadmInit() {
     yadm branch --set-upstream-to=origin/master
 }
 loadDconf() {
-    if ! grep -qEi "(Microsoft|WSL)" /proc/sys/kernel/osrelease &> /dev/null ; then
+    if [ "${XDG_CURRENT_DESKTOP}" = "GNOME" ] && ! grep -qEi "(Microsoft|WSL)" /proc/sys/kernel/osrelease &> /dev/null ; then
         INFO "Restoring dconf db"
         dconf load / < "${HOME}"/.config/dconf/dconf.ini
     fi
