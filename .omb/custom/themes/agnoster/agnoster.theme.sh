@@ -231,7 +231,7 @@ prompt_context() {
 
     if [[ $user != $DEFAULT_USER || -n $SSH_CLIENT ]]; then
         # prompt_segment black default "$user@\h"
-        prompt_segment blue black "$user"
+        prompt_segment black white "$user@\h"
     fi
 }
 
@@ -265,7 +265,7 @@ prompt_git() {
 
 # Dir: current working directory
 prompt_dir() {
-    prompt_segment cyan black '\w'
+    prompt_segment blue black '\w'
 }
 
 # Status:
@@ -279,7 +279,7 @@ prompt_status() {
     [[ $UID -eq 0 ]] && symbols+="$(ansi_single $(fg_color yellow))🌊"
     [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="$(ansi_single $(fg_color cyan))⚙"
 
-    [[ -n "$symbols" ]] && prompt_segment blue black "$symbols"
+    [[ -n "$symbols" ]] && prompt_segment black white "$symbols"
 }
 
 ######################################################################
