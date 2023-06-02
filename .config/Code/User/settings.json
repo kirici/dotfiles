@@ -12,5 +12,28 @@
     "explorer.confirmDragAndDrop": false,
     "git.enableSmartCommit": true,
     "editor.fontFamily": "'JetBrainsMono Nerd Font'",
-    // Explorer's width is equal to a filename of 55 'I's (untracked file).
+    "workbench.colorCustomizations": {
+        // Slightly altered version of Adwaita/Gnome
+        "terminal.background":"#1E1E1E",
+        "terminal.foreground":"#FAFAFA",
+        "terminalCursor.background":"#FAFAFA",
+        "terminalCursor.foreground":"#FAFAFA",
+        "terminal.ansiBlack":"#0A0A0A",
+        "terminal.ansiBlue":"#12488B",
+        "terminal.ansiBrightBlack":"#5E5C64",
+        "terminal.ansiBrightBlue":"#2A7BDE",
+        "terminal.ansiBrightCyan":"#33C7DE",
+        "terminal.ansiBrightGreen":"#33D17A",
+        "terminal.ansiBrightMagenta":"#C061CB",
+        "terminal.ansiBrightRed":"#F66151",
+        "terminal.ansiBrightWhite":"#FFFFFF",
+        "terminal.ansiBrightYellow":"#E9AD0C",
+        "terminal.ansiCyan":"#2AA1B3",
+        "terminal.ansiGreen":"#26A269",
+        "terminal.ansiMagenta":"#A347BA",
+        "terminal.ansiRed":"#C01C28",
+        "terminal.ansiWhite":"#FAFAFA",
+        "terminal.ansiYellow":"#A2734C"
+        // Alternatively: https://glitchbone.github.io/vscode-base16-term/#/brewer
+    },
 }
