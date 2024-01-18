@@ -76,7 +76,10 @@ else
   export EDITOR='micro'
 fi
 
-# options
+# Completions without a plugin (yet)
+source <(jj util completion --zsh)
+
+# Options
 setopt HIST_IGNORE_SPACE
 
 # Exports, general
