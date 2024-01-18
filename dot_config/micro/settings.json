@@ -1,0 +1,14 @@
+{
+    "autoclose": false,
+    "colorscheme": "material-tc",
+    "diffgutter": true,
+    "hlsearch": true,
+    "indentchar": "⡇",
+    "lsp.ignoreTriggerCharacters": "completion,signature",
+    "lsp.server": "python=pyls,go=gopls",
+    "mkparents": true,
+    "rmtrailingws": true,
+    "scrollspeed": 4,
+    "softwrap": true,
+    "tabstospaces": true
+}

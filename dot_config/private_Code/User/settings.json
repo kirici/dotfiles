@@ -1,0 +1,39 @@
+{
+    "telemetry.telemetryLevel": "off",
+    "editor.autoIndent": "keep",
+    "editor.fontFamily": "'JetBrainsMonoNL Nerd Font Mono'",
+    "editor.formatOnSave": true,
+    "editor.minimap.enabled": false,
+    "editor.tabSize": 4,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "extensions.ignoreRecommendations": true,
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.minimumContrastRatio": 1,
+    "window.commandCenter": true,
+    "window.titleBarStyle": "custom",
+    "workbench.startupEditor": "none",
+    // Extensions
+    "workbench.colorTheme": "Atom One Dark",
+    "workbench.iconTheme": "material-icon-theme",
+    "go.useLanguageServer": true,
+    "gopls": {
+        "formatting.gofumpt": true
+    },
+    "codeium.enableCodeLens": false,
+    "codeium.enableConfig": {
+        "*": true,
+    },
+    "codesnap.showWindowControls": false,
+    "codesnap.showWindowTitle": false,
+    "codesnap.shutterAction": "copy",
+    "codesnap.target": "window",
+    "indentRainbow.excludedLanguages": [
+        "go"
+    ],
+    "markdown-preview-github-styles.colorTheme": "light",
+    "gitlens.views.commitDetails.files.layout": "tree",
+    "dev.containers.dockerPath": "podman",
+}
