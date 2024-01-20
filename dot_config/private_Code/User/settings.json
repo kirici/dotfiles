@@ -1,5 +1,6 @@
 {
     "telemetry.telemetryLevel": "off",
+    "diffEditor.ignoreTrimWhitespace": false,
     "editor.autoIndent": "keep",
     "editor.fontFamily": "'JetBrainsMonoNL Nerd Font Mono'",
     "editor.formatOnSave": true,
@@ -8,8 +9,9 @@
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "extensions.ignoreRecommendations": true,
-    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
     "git.autofetch": true,
     "git.confirmSync": false,
     "terminal.integrated.enableMultiLinePasteWarning": false,
