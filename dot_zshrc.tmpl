@@ -76,9 +76,6 @@ else
   export EDITOR='micro'
 fi
 
-# Completions without a plugin (yet)
-source <(jj util completion --zsh)
-
 # Options
 setopt HIST_IGNORE_SPACE
 
@@ -130,3 +127,6 @@ podautobuildjj() {
   -t $(basename $(realpath ..)| awk '{print tolower($0)}').local/$(basename $(realpath .)| awk '{print tolower($0)}'):latest \
   .
 }
+
+# Completions without a plugin (yet)
+source <(jj util completion --zsh)
