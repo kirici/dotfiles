@@ -3,6 +3,7 @@
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.autoIndent": "keep",
     "editor.fontFamily": "'JetBrains Mono NL'",
+    "editor.fontSize": 15,
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
     "editor.tabSize": 4,
