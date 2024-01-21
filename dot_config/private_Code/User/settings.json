@@ -2,7 +2,7 @@
     "telemetry.telemetryLevel": "off",
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.autoIndent": "keep",
-    "editor.fontFamily": "'JetBrainsMonoNL Nerd Font Mono'",
+    "editor.fontFamily": "'JetBrains Mono NL'",
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
     "editor.tabSize": 4,
