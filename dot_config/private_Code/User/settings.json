@@ -16,6 +16,7 @@
     "git.autofetch": true,
     "git.confirmSync": false,
     "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.fontSize": 15,
     "terminal.integrated.minimumContrastRatio": 1,
     "window.commandCenter": true,
     "window.titleBarStyle": "custom",
