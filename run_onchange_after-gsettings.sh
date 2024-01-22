@@ -1,6 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
+if grep -qF microsoft /proc/sys/kernel/osrelease; then
+    exit 0
+fi
+
 if ! command -v gsettings >/dev/null 2>&1; then
     echo "No gsettings found"
     exit 1
