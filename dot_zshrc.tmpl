@@ -125,27 +125,25 @@ alias pis='podman images'
 alias pisr='podman images --sort=repository'
 
 # Funcs
-podautobuild() {
-  podman build \
-  -t $(basename $(realpath ..)| awk '{print tolower($0)}').local/$(basename $(realpath .)| awk '{print tolower($0)}'):$(git rev-parse --short HEAD) \
-  -t $(basename $(realpath ..)| awk '{print tolower($0)}').local/$(basename $(realpath .)| awk '{print tolower($0)}'):latest \
-  .
+function podbuild {
+  if [[ $# -eq 0 ]] ; then
+    echo "Usage: $funcstack[1] <containerfile>"
+    return
+  fi
+  if [[ ! $(git rev-parse --short HEAD) ]] ; then
+    podman build -t "${1:r}":latest -f "${1}"
+  fi
+  podman build -t "${1:r}":"$(git rev-parse --short HEAD)" -t "${1:r}":latest -f "${1}"
 }
 
 {{ if eq .chezmoi.os "linux" -}}
 {{   if eq .chezmoi.osRelease.id "ubuntu" -}}
+# Ensure SSH agent
 if [ -z $SSH_AUTH_SOCK ] ; then
   eval $(ssh-agent -s) >/dev/null 2>&1
   ssh-add >/dev/null 2>&1
 fi
 {{   else if eq .chezmoi.osRelease.id "fedora" -}}
-podautobuildjj() {
-  podman build \
-  -t $(basename $(realpath ..)| awk '{print tolower($0)}').local/$(basename $(realpath .)| awk '{print tolower($0)}'):$(jj show | head -n 1 | awk '{print $3}') \
-  -t $(basename $(realpath ..)| awk '{print tolower($0)}').local/$(basename $(realpath .)| awk '{print tolower($0)}'):latest \
-  .
-}
-
 # Completions without a plugin (yet)
 source <(jj util completion --zsh)
 {{   end -}}
