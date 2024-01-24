@@ -97,7 +97,13 @@ export PATH=$PATH:$HOME/.local/bin
 
 # Exports, programs
 alias dnf='dnf5'
+{{- if eq .chezmoi.os "linux" }}
+{{-   if eq .chezmoi.osRelease.id "ubuntu" }}
+alias cat='batcat -pp'
+{{   else if eq .chezmoi.osRelease.id "fedora" }}
 alias cat='bat -pp'
+{{-   end }}
+{{- end }}
 export PAGER="less -FRX"
 export BAT_PAGER="less -FRX"
 
@@ -136,15 +142,15 @@ function podbuild {
   podman build --label autobuild -t "${1:r}":"$(git rev-parse --short HEAD)" -t "${1:r}":latest -f "${1}"
 }
 
-{{ if eq .chezmoi.os "linux" -}}
+{{- if eq .chezmoi.os "linux" }}
 {{   if eq .chezmoi.osRelease.id "ubuntu" -}}
 # Ensure SSH agent
 if [ -z $SSH_AUTH_SOCK ] ; then
   eval $(ssh-agent -s) >/dev/null 2>&1
   ssh-add >/dev/null 2>&1
 fi
-{{   else if eq .chezmoi.osRelease.id "fedora" -}}
+{{-   else if eq .chezmoi.osRelease.id "fedora" }}
 # Completions without a plugin (yet)
 source <(jj util completion --zsh)
-{{   end -}}
-{{ end -}}
+{{-   end }}
+{{- end }}
