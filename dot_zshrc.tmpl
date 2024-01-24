@@ -131,9 +131,9 @@ function podbuild {
     return
   fi
   if [[ ! $(git rev-parse --short HEAD) ]] ; then
-    podman build -t "${1:r}":latest -f "${1}"
+    podman build --label autobuild -t "${1:r}":latest -f "${1}"
   fi
-  podman build -t "${1:r}":"$(git rev-parse --short HEAD)" -t "${1:r}":latest -f "${1}"
+  podman build --label autobuild -t "${1:r}":"$(git rev-parse --short HEAD)" -t "${1:r}":latest -f "${1}"
 }
 
 {{ if eq .chezmoi.os "linux" -}}
