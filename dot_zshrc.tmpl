@@ -100,7 +100,7 @@ alias dnf='dnf5'
 {{- if eq .chezmoi.os "linux" }}
 {{-   if eq .chezmoi.osRelease.id "ubuntu" }}
 alias cat='batcat -pp'
-{{   else if eq .chezmoi.osRelease.id "fedora" }}
+{{-   else if eq .chezmoi.osRelease.id "fedora" }}
 alias cat='bat -pp'
 {{-   end }}
 {{- end }}

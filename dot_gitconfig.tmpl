@@ -8,7 +8,7 @@
 {{- if eq .chezmoi.os "linux" }}
 {{-   if eq .chezmoi.osRelease.id "ubuntu" }}
 	pager = batcat -p
-{{   else if eq .chezmoi.osRelease.id "fedora" }}
+{{-   else if eq .chezmoi.osRelease.id "fedora" }}
 	pager = bat -p
 {{-   end }}
 {{- end }}
