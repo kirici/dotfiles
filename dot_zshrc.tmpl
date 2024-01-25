@@ -124,24 +124,6 @@ alias glfp="git log --graph --pretty='format:%C(auto)%h% D %C(reset blue)<%an> %
 alias gls="git log --graph --pretty='format:%C(auto)%h% D %C(reset blue)<%an> %C(reset green dim)%ar %C(reset white dim)(%ai) %Creset%n %C(normal ul bold)%s%Creset%n' --stat=80"
 alias glsfp="git log --graph --pretty='format:%C(auto)%h% D %C(reset blue)<%an> %C(reset green dim)%ar %C(reset white dim)(%ai) %Creset%n %C(normal ul bold)%s%Creset%n' --stat=80 --first-parent"
 
-# Aliases, container
-alias podps='podman ps -a --format "table {{ "{{" }}.ID{{ "}}" }}\t{{ "{{" }}.Names{{ "}}" }}\t{{ "{{" }}.Image{{ "}}" }}\t{{ "{{" }}.Status{{ "}}" }}\t{{ "{{" }}.Ports{{ "}}" }}"'
-alias podalp='podman run -it --rm docker.io/library/alpine:3.18.4'
-alias pis='podman images'
-alias pisr='podman images --sort=repository'
-
-# Funcs
-function podbuild {
-  if [[ $# -eq 0 ]] ; then
-    echo "Usage: $funcstack[1] <containerfile>"
-    return
-  fi
-  if [[ ! $(git rev-parse --short HEAD) ]] ; then
-    podman build --label autobuild -t "${1:r}":latest -f "${1}"
-  fi
-  podman build --label autobuild -t "${1:r}":"$(git rev-parse --short HEAD)" -t "${1:r}":latest -f "${1}"
-}
-
 {{- if eq .chezmoi.os "linux" }}
 {{   if eq .chezmoi.osRelease.id "ubuntu" -}}
 # Ensure SSH agent
