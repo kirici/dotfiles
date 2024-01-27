@@ -124,6 +124,10 @@ alias glfp="git log --graph --pretty='format:%C(auto)%h% D %C(reset blue)<%an> %
 alias gls="git log --graph --pretty='format:%C(auto)%h% D %C(reset blue)<%an> %C(reset green dim)%ar %C(reset white dim)(%ai) %Creset%n %C(normal ul bold)%s%Creset%n' --stat=80"
 alias glsfp="git log --graph --pretty='format:%C(auto)%h% D %C(reset blue)<%an> %C(reset green dim)%ar %C(reset white dim)(%ai) %Creset%n %C(normal ul bold)%s%Creset%n' --stat=80 --first-parent"
 
+# Keybindings
+bindkey "\e[1~" beginning-of-line
+bindkey "\e[4~" end-of-line
+
 {{- if eq .chezmoi.os "linux" }}
 {{   if eq .chezmoi.osRelease.id "ubuntu" -}}
 # Ensure SSH agent
