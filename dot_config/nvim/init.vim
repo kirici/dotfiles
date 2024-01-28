@@ -16,8 +16,8 @@ set number
 set shiftwidth=4
 set showmatch
 set softtabstop=4
-set spell
 set tabstop=4
 set ttyfast
 syntax on
+"set spell
 "set cursorline
