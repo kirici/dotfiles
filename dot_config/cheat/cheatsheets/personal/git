@@ -35,7 +35,7 @@ git commit --date="`date --date='2 day ago'`"
 git commit --date="Jun 13 18:30:25 IST 2015"
 # more recent versions of Git also support --date="2 days ago" directly
 
-# Rebase all past commits while keeping their timestampts
+# Rebase all past commits while keeping their timestamps
 git -c rebase.instructionFormat='%s%nexec GIT_COMMITTER_DATE="%cD" GIT_AUTHOR_DATE="%aD" git commit [-S] --amend --no-edit --reset-author' rebase [-i] [--root]
 
 # To change the date of an existing commit:
