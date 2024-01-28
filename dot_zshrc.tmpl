@@ -128,6 +128,16 @@ alias glsfp="git log --graph --pretty='format:%C(auto)%h% D %C(reset blue)<%an> 
 bindkey "\e[1~" beginning-of-line
 bindkey "\e[4~" end-of-line
 
+# Functions
+## Automatically run ls after changing the current dir
+function list_all() {
+  emulate -L zsh
+  ls
+}
+if [[ ${chpwd_functions[(r)list_all]} != "list_all" ]];then
+  chpwd_functions=(${chpwd_functions[@]} "list_all")
+fi
+
 {{- if eq .chezmoi.os "linux" }}
 {{   if eq .chezmoi.osRelease.id "ubuntu" -}}
 # Ensure SSH agent
