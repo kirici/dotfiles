@@ -12,7 +12,7 @@ fi
 
 podman completion zsh 2> /dev/null >| "$ZSH_CACHE_DIR/completions/_podman" &|
 
-alias podalp='podman run -it --rm docker.io/library/alpine:3.18.4'
+alias podalp='podman run -it --rm docker.io/library/alpine:3.19'
 alias podis='podman images'
 alias podisr='podman images --sort=repository'
 alias podlo='podman container logs'
