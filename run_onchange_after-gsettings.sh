@@ -13,7 +13,7 @@ fc-cache -f
 
 # Gnome desktop interface
 gsettings set org.gnome.desktop.interface clock-show-seconds true
-gsettings set org.gnome.desktop.interface monospace-font-name 'Victor Mono Semi-Bold 13'
+gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrains Mono NL 12'
 
 # Gnome shell
 gsettings set org.gnome.shell enabled-extensions "['background-logo@fedorahosted.org', 'Vitals@CoreCoding.com', 'clipboard-history@alexsaveau.dev']"
