@@ -130,7 +130,7 @@ bureau_precmd () {
 
 setopt prompt_subst
 PROMPT='> $_LIBERTY '
-RPROMPT='$(nvm_prompt_info) $(exit_code_prompt) $(bureau_git_prompt)'
+RPROMPT='$(nvm_prompt_info) $(exit_code_prompt) $(kube_ps1) $(bureau_git_prompt)'
 
 autoload -U add-zsh-hook
 add-zsh-hook precmd bureau_precmd
