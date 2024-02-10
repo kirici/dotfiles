@@ -152,6 +152,6 @@ if [ -z $SSH_AUTH_SOCK ] ; then
 fi
 {{-   else if eq .chezmoi.osRelease.id "fedora" }}
 # Completions without a plugin (yet)
-source <(jj util completion --zsh)
+source <(jj util completion zsh)
 {{-   end }}
 {{- end }}
