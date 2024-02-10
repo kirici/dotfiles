@@ -128,6 +128,7 @@ alias kpf="kubectl port-forward"
 # Tools for accessing all information
 alias kga='kubectl get all'
 alias kgaa='kubectl get all --all-namespaces'
+alias kgall='kubectl get nodes,ns,all,cm,ing,secrets -A'
 
 # Logs
 alias kl='kubectl logs'
