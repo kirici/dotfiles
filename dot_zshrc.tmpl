@@ -97,14 +97,6 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.krew/bin
 
 # Exports, programs
-alias dnf='dnf5'
-{{- if eq .chezmoi.os "linux" }}
-{{-   if eq .chezmoi.osRelease.id "ubuntu" }}
-alias cat='batcat -pp'
-{{-   else if eq .chezmoi.osRelease.id "fedora" }}
-alias cat='bat -pp'
-{{-   end }}
-{{- end }}
 export PAGER="less -FRX"
 export BAT_PAGER="less -FRX"
 
@@ -113,6 +105,16 @@ alias l='ls -Aght --group-directories-first'
 alias c='clear'
 alias dud='du -d 1 -h'
 alias mkcdtemp='cd $(mktemp -d)'
+
+# Aliases, programs
+alias dnf='dnf5'
+{{- if eq .chezmoi.os "linux" }}
+{{-   if eq .chezmoi.osRelease.id "ubuntu" }}
+alias cat='batcat -pp'
+{{-   else if eq .chezmoi.osRelease.id "fedora" }}
+alias cat='bat -pp'
+{{-   end }}
+{{- end }}
 
 # Aliases, git
 alias gaa='git add --all .'
