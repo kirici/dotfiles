@@ -8,8 +8,6 @@
 {{- if eq .chezmoi.os "linux" }}
 {{-   if eq .chezmoi.osRelease.id "ubuntu" }}
 	pager = batcat -p
-[credential]
-	helper = store
 {{-   else if eq .chezmoi.osRelease.id "fedora" }}
 	pager = bat -p
 {{-   end }}
@@ -25,3 +23,9 @@
 	allowedSignersFile = /home/{{ .chezmoi.username }}/.config/git/allowed_signers
 [rerere]
 	enabled = true
+{{- if eq .chezmoi.os "linux" }}
+{{-   if eq .chezmoi.osRelease.id "ubuntu" }}
+[credential]
+	helper = store
+{{-   end }}
+{{- end }}
