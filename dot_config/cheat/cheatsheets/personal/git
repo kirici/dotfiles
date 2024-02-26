@@ -90,6 +90,9 @@ git branch -u upstream/foo
 # To see who commited which line in a file:
 git blame <file>
 
+# Blame specific Lines (-L), ignoring whitespace changes (-w) and moves (-M)
+git blame -Mw -L <start>,<end> <file>
+
 # To sync a fork with the master repo:
 git remote add upstream git@github.com:<username>/<repo>.git # Set a new repo
 git remote -v                                                # Confirm new remote repo
