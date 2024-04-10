@@ -8,6 +8,10 @@ openssl req -new -key server.key -out server.csr
 openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
 # (The above commands may be run in sequence to generate a self-signed SSL certificate.)
+# E.g.
+openssl genrsa -out private.key 4096 \
+  && openssl req -new -key private.key -out signreq.csr -subj "/CN=FQDN" \
+  && openssl x509 -req -days 365 -in signreq.csr -signkey private.key -out cert.crt
 
 # To show certificate information for a certificate signing request
 openssl req -text -noout -in server.csr
