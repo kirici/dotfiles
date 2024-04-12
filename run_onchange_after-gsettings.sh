@@ -13,7 +13,7 @@ fc-cache -f
 
 # Gnome desktop interface
 gsettings set org.gnome.desktop.interface clock-show-seconds true
-gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMonoNL Nerd Font 12'
+gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMonoNL Nerd Font 13'
 
 # Gnome shell
 gsettings set org.gnome.shell enabled-extensions "['background-logo@fedorahosted.org', 'Vitals@CoreCoding.com', 'clipboard-history@alexsaveau.dev']"
@@ -31,7 +31,7 @@ gsettings_list=(
     'scrollback-lines 10000'
     'use-system-font true'
     'use-theme-colors true'
-    'background-transparency-percent 5'
+    'background-transparency-percent 0'
     'use-transparent-background true'
     'visible-name '"'brk'"''
 )
