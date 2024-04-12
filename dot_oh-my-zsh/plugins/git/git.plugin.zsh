@@ -103,7 +103,7 @@ compdef _git ggpnp=git-checkout
 alias ggpur='ggu'
 alias g='git'
 alias ga='git add'
-alias gaa='git add --all'
+alias gaa='git add --all .'
 alias gapa='git add --patch'
 alias gau='git add --update'
 alias gav='git add --verbose'
@@ -200,9 +200,8 @@ alias gcn!='git commit --verbose --no-edit --amend'
 alias gcf='git config --list'
 alias gdct='git describe --tags $(git rev-list --tags --max-count=1)'
 alias gd='git diff'
-alias gdca='git diff --cached'
-alias gdcw='git diff --cached --word-diff'
 alias gds='git diff --staged'
+alias gdsw='git diff --staged --word-diff'
 alias gdw='git diff --word-diff'
 
 function gdv() { git diff -w "$@" | view - }
@@ -222,32 +221,17 @@ is-at-least 2.8 "$git_version" \
   && alias gfa='git fetch --all --prune --jobs=10' \
   || alias gfa='git fetch --all --prune'
 alias gfo='git fetch origin'
-alias gg='git gui citool'
-alias gga='git gui citool --amend'
-alias ghh='git help'
-alias glgg='git log --graph'
-alias glgga='git log --graph --decorate --all'
-alias glgm='git log --graph --max-count=10'
-alias glods='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset" --date=short'
-alias glod='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset"'
-alias glola='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --all'
-alias glols='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --stat'
-alias glol='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
-alias glo='git log --oneline --decorate'
-alias glog='git log --oneline --decorate --graph'
-alias gloga='git log --oneline --decorate --graph --all'
 
-# Pretty log messages
-function _git_log_prettily(){
-  if ! [ -z $1 ]; then
-    git log --pretty=$1
-  fi
-}
-compdef _git _git_log_prettily=git-log
+alias ghist='git log --follow -p -U0 --ignore-all-space --'
+alias gloa='git log --oneline --graph --all'
 
-alias glp='_git_log_prettily'
-alias glg='git log --stat'
-alias glgp='git log --stat --patch'
+alias gl='git log --graph'
+alias gla='git log --graph --all'
+alias glp="git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)'"
+alias glps="git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)%n' --stat=80"
+alias glpa="git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)' --all"
+alias glpaf="git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)' --all --first-parent"
+
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias gfg='git ls-files | grep'
 alias gm='git merge'
@@ -259,7 +243,6 @@ alias gmum='git merge upstream/$(git_main_branch)'
 alias gmtl='git mergetool --no-prompt'
 alias gmtlvim='git mergetool --no-prompt --tool=vimdiff'
 
-alias gl='git pull'
 alias gpr='git pull --rebase'
 alias gprv='git pull --rebase -v'
 alias gpra='git pull --rebase --autostash'
