@@ -22,7 +22,7 @@
     "window.titleBarStyle": "custom",
     "workbench.startupEditor": "none",
     // Extensions
-    "workbench.colorTheme": "Atom One Dark",
+    "workbench.colorTheme": "Tokyo Storm AltSynt",
     "workbench.iconTheme": "material-icon-theme",
     "go.useLanguageServer": true,
     "gopls": {
