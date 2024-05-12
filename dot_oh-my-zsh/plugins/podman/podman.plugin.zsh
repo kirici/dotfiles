@@ -20,7 +20,7 @@ alias ppsaft='podman ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.S
 alias prd='podman container run -td'
 alias pri='podman container run -it'
 
-alias podalp='podman run -it --rm docker.io/library/alpine:3.19'
+alias podalp='podman run -it --rm docker.io/library/alpine:latest'
 alias podlo='podman container logs'
 alias podrm='podman container rm'
 alias 'podrm!'='podman container rm --force'
