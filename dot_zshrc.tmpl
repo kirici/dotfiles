@@ -125,7 +125,8 @@ bindkey "\e[1~" beginning-of-line
 bindkey "\e[4~" end-of-line
 
 # Restore zsh word delimiter after omz is sourced
-WORDCHARS='*?_-.[]~=&!#$%^(){}<>'
+# default: WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
+WORDCHARS='*?.~&;!#%^'
 
 # Functions
 ## Automatically run ls after changing the current dir
