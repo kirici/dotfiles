@@ -90,14 +90,14 @@ return {
       gopls = {
         settings = {
           gopls = {
-             codelenses = {
-              generate = true, -- `go generate` lens.
+            codelenses = {
               gc_details = true, -- Show a code lens toggling the display of gc's choices.
+              generate = true, -- `go generate` lens.
+              regenerate_cgo = true,
               test = true,
               tidy = true,
-              vendor = true,
-              regenerate_cgo = true,
               upgrade_dependency = true,
+              vendor = true,
             },
             hints = {
               assignVariableTypes = true,
