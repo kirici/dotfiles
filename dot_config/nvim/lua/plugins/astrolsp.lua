@@ -90,6 +90,17 @@ return {
       gopls = {
         settings = {
           gopls = {
+            analyses = {
+              fieldalignment = true,
+              nilness = true,      -- default: on
+              shadow = true,
+              unreachable = true,  -- default: on
+              unusedparams = true, -- default: on
+              unusedresult = true, -- default: on
+              unusedvariable = true,
+              unusedwrite = true,  -- default: on
+              useany = true,
+            },
             codelenses = {
               gc_details = true, -- Show a code lens toggling the display of gc's choices.
               generate = true, -- `go generate` lens.
