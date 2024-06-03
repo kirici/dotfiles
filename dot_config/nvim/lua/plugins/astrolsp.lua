@@ -44,6 +44,49 @@ return {
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      pylsp = {
+        settings = {
+          pylsp = {
+            plugins = {
+              -- formatter options
+              autopep8 = {
+                enabled = false
+              },
+              black = {
+                enabled = false
+              },
+              yapf = {
+                enabled = false
+              },
+              -- linter options
+              pycodestyle = {
+                maxLineLength = 120
+              },
+              pyflakes = {
+                enabled = false
+              },
+              pylint = {
+                enabled = false
+              },
+              ruff = {
+                enabled = false
+              },
+              -- type checker
+              pylsp_mypy = {
+                enabled = false
+              },
+              -- auto-completion options
+              jedi_completion = {
+                enabled = false
+              },
+              -- import sorting
+              isort = {
+                enabled = true
+              },
+            },
+          },
+        },
+      },
     },
     -- customize how language servers are attached
     handlers = {
