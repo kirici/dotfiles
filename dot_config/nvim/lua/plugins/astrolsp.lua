@@ -53,20 +53,20 @@ return {
                 enabled = false
               },
               black = {
-                enabled = false
+                enabled = true
               },
               yapf = {
-                enabled = false
+                enabled = true
               },
               -- linter options
               pycodestyle = {
                 maxLineLength = 120
               },
               pyflakes = {
-                enabled = false
+                enabled = true
               },
               pylint = {
-                enabled = false,
+                enabled = true,
                 args = {
                   "--max-line-length=120",
                   "--disable=E0401",
