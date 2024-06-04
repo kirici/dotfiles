@@ -56,7 +56,7 @@ return {
                 enabled = true
               },
               yapf = {
-                enabled = true
+                enabled = false
               },
               -- linter options
               pycodestyle = {
