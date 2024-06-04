@@ -66,7 +66,11 @@ return {
                 enabled = false
               },
               pylint = {
-                enabled = false
+                enabled = false,
+                args = {
+                  "--max-line-length=120",
+                  "--disable=E0401",
+                },
               },
               ruff = {
                 enabled = false
