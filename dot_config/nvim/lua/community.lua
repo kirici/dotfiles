@@ -11,5 +11,6 @@ return {
   { import = "astrocommunity.editing-support.multiple-cursors-nvim" },
   { import = "astrocommunity.editing-support.neogen" },
   { import = "astrocommunity.editing-support.refactoring-nvim" },
+  { import = "astrocommunity.scrolling.neoscroll-nvim" },
   -- import/override with your plugins folder
 }
