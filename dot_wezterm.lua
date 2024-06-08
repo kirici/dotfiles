@@ -3,9 +3,9 @@ local config = wezterm.config_builder()
 
 -- CONFIG START
 
--- config.color_scheme = "Elementary (Gogh)"
--- config.color_scheme = "Espresso (Gogh)"
-config.color_scheme = "Obsidian (Gogh)"
+-- config.color_scheme = "Obsidian (Gogh)"
+-- config.color_scheme = "Dark+"
+config.color_scheme = "Darkside (Gogh)"
 
 config.initial_rows = 35
 config.initial_cols = 140
