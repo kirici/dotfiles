@@ -224,7 +224,9 @@ alias gfo='git fetch origin'
 
 alias ghist='git log --follow -p -U0 --ignore-all-space --'
 alias ghistt='git log --follow -p -U0 --ignore-all-space --ext-diff'
-alias gloa='git log --oneline --graph --all'
+alias glo='git log --oneline'
+alias gloa='git log --oneline --all'
+alias gloga='git log --oneline --graph --all'
 
 alias gl='git log --graph'
 alias gla='git log --graph --all'
