@@ -222,7 +222,7 @@ is-at-least 2.8 "$git_version" \
   || alias gfa='git fetch --all --prune'
 alias gfo='git fetch origin'
 
-alias ghist='git log --follow -p -U0 --ignore-all-space --'
+alias ghist='git log --follow -p -U0 --ignore-all-space'
 alias ghistt='git log --follow -p -U0 --ignore-all-space --ext-diff'
 alias glo='git log --oneline'
 alias gloa='git log --oneline --all'
