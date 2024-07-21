@@ -109,14 +109,7 @@ alias grepIP="grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'"
 
 # Aliases, programs
 alias dnf='dnf5'
-{{- if eq .chezmoi.os "linux" }}
-{{-   if eq .chezmoi.osRelease.id "ubuntu" }}
-alias cat='batcat -pp'
-alias fd='fdfind'
-{{-   else if eq .chezmoi.osRelease.id "fedora" }}
 alias cat='bat -pp'
-{{-   end }}
-{{- end }}
 # TODO: create jj plugin for omz
 alias jjla="jj log -r 'all()'"
 alias xh='xh -Fb'
