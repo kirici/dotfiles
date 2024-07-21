@@ -124,9 +124,11 @@ alias jjla="jj log -r 'all()'"
 bindkey "\e[1~" beginning-of-line
 bindkey "\e[4~" end-of-line
 
+# Zsh specific env vars
 # Restore zsh word delimiter after omz is sourced
 # default: WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 WORDCHARS='*?.~&;!#%^'
+ZDOTDIR="$HOME/.local/state/zsh"
 
 # Functions
 ## Automatically run ls after changing the current dir
