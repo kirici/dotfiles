@@ -6,3 +6,7 @@ fi
 
 eval "$(ssh-agent -s)"
 ssh-add "$HOME"/.ssh/id_ed25519
+
+ssh_add_list="$(ssh-add -L)"
+mkdir -p "$HOME"/.config/git
+echo "74684021+kirici@users.noreply.github.com $ssh_add_list" > "$HOME"/.config/git/allowed_signers
