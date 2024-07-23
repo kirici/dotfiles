@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-if grep -qF microsoft /proc/sys/kernel/osrelease; then
+if ! echo "${XDG_CURRENT_DESKTOP}" | grep -Eio 'gnome' ; then
     exit 0
 fi
 
