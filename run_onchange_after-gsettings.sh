@@ -16,8 +16,8 @@ gsettings set org.gnome.desktop.interface clock-show-seconds true
 gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMonoNL Nerd Font 13'
 
 # Gnome shell
-gsettings set org.gnome.shell enabled-extensions "['background-logo@fedorahosted.org', 'Vitals@CoreCoding.com', 'clipboard-history@alexsaveau.dev', 'pano@elhan.io', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com']"
 gsettings set org.gnome.shell favorite-apps "['io.github.ungoogled_software.ungoogled_chromium.desktop', 'code.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop']"
+gsettings set org.gnome.shell enabled-extensions "['background-logo@fedorahosted.org', 'Vitals@CoreCoding.com', 'clipboard-history@alexsaveau.dev', 'pano@elhan.io', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'search-light@icedman.github.com']"
 
 # Terminal
 profile=$(gsettings get org.gnome.Terminal.ProfilesList default | awk -F \' '{print $2}')
