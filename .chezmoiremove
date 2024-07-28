@@ -1,3 +1,6 @@
 .wget-hsts
 .lesshst
 .zcompdump
+.python_history
+.sqlite_history
+.psql_history
