@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-if ! echo "${XDG_CURRENT_DESKTOP}" | grep -Eio 'gnome' ; then
+if ! echo "${XDG_CURRENT_DESKTOP}" | grep -Eiqo 'gnome' ; then
     exit 0
 fi
 
