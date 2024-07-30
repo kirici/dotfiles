@@ -233,6 +233,7 @@ alias gl='git log --graph'
 alias gla='git log --graph --all'
 alias glp="git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)'"
 alias glps="git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)%n' --stat=80"
+alias glpf="git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)' --first-parent"
 alias glpa="git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)' --all"
 alias glpaf="git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)' --all --first-parent"
 
