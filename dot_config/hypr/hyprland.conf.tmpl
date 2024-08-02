@@ -1,3 +1,4 @@
+{{ if lookPath "Hyprland" -}}
 # See https://wiki.hyprland.org/Configuring/Monitors/
 monitor=,2560x1440@165,0x0,1,vrr,1
 
@@ -186,3 +187,4 @@ bindl=, XF86AudioNext, exec, playerctl next
 
 # custom
 bindr = $mainMod, L, exec, pkill rofi || rofi -show drun
+{{ end -}}
