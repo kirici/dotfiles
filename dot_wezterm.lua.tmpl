@@ -1,3 +1,4 @@
+{{ if stat (joinPath .chezmoi.homeDir ".var" "app" "org.wezfurlong.wezterm" ) -}}
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
@@ -31,3 +32,4 @@ config.window_frame = {
 -- CONFIG END
 
 return config
+{{ end -}}
