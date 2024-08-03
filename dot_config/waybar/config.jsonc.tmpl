@@ -1,0 +1,73 @@
+{{ if lookPath "waybar" -}}
+{
+  "position": "top",
+    "margin-top" : 5,
+    "margin-left": 5,
+    "margin-right": 5,
+    "height" : 35,
+    "modules-left": [
+      "hyprland/workspaces",
+    ],
+    "modules-center": [
+      "clock"
+    ],
+    "modules-right": [
+    "pulseaudio",
+    "network",
+    "cpu",
+    "memory",
+    "temperature",
+    ],
+    "hyprland/workspaces": {
+      "format": "{icon}",
+      "on-click": "activate",
+      "format-icons": {
+        "active": "",
+      },
+      "sort-by-number": true,
+      "persistent-workspaces": {
+        "*": 4, // 5 workspaces by default on every monitor
+      },
+    },
+    "clock": {
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+      "format-alt": "{:%Y-%m-%d}"
+    },
+    "cpu": {
+      "format": "  {usage}%",
+      "tooltip": false
+    },
+    "memory": {
+      "format": "{}%  "
+    },
+    "temperature": {
+      "critical-threshold": 80,
+      "format": "{icon} {temperatureC}°C",
+      "format-icons": ["", "", ""]
+    },
+    "network": {
+      "format-wifi": "  {signalStrength}%",
+      "format-ethernet": "{ifname}/{cidr}",
+      "tooltip-format": "{ifname} via {gwaddr}",
+      "format-linked": "{ifname} (No IP)",
+      "format-disconnected": " ⚠ ",
+      "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+      "format": "{icon}  {volume}%",
+      "format-bluetooth": "{volume}% {icon} {format_source}",
+      "format-bluetooth-muted": "{icon} {format_source}",
+      "format-muted": "{format_source}",
+      "format-icons": {
+        "headphone": "",
+        "hands-free": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", "", ""]
+      },
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    },
+}
+{{ end -}}
