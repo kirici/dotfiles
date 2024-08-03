@@ -94,6 +94,10 @@ setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 
 # Exports, general
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_STATE_HOME="${HOME}/.local/state"
 export HISTORY_IGNORE="(l|c|pwd|exit|cd ..)"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
