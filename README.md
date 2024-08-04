@@ -1,16 +1,25 @@
 # kirici's .files
 
 ### Prerequisites
-Fedora 39
 
-`curl -sL bootstrap.kirici.io | sudo bash`
+Fedora 39+
 
-### Preferred method
+### Usage
 
-`curl -sL bootstrap.kirici.io | bash`
+```bash
+curl -sL bootstrap.kirici.io | bash
+```
 
-This will run user-wide setups, including the chezmoi command below. If you'd like to run the same setups with a different chezmoi-dotfiles repo, you can use `curl -sL bootstrap.kirici.io | GITHUB_USER=$USERNAME bash`
+This will run system and user setups, including syncing dotfiles via chezmoi.
+
+If you'd like to run the same setups with a different dotfiles repo, you can use 
+
+```bash
+curl -sL bootstrap.kirici.io | GITHUB_USER=$USERNAME bash
+```
 
 ### Dotfiles only
 
-`sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply kirici`
+```bash
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply kirici`
+```
