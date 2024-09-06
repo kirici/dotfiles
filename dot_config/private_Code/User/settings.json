@@ -42,4 +42,8 @@
     "markdown-preview-github-styles.colorTheme": "light",
     "gitlens.views.commitDetails.files.layout": "tree",
     "dev.containers.dockerPath": "podman",
+    "docker.environment": {
+        "DOCKER_HOST": "/run/user/1000/podman/podman.sock"
+    },
+    "docker.dockerPath": "podman",
 }
