@@ -64,11 +64,22 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
+plugins=()
+{{ if lookPath "git" -}}
+plugins+=(git)
+{{- end }}
+{{ if lookPath "kubectl" -}}
+plugins+=(kubectl)
+plugins+=(kube-ps1)
+{{- end }}
+{{ if lookPath "podman" -}}
+plugins+=(podman)
+{{- end }}
 {{ if lookPath "tmux" -}}
-plugins=(git kubectl kube-ps1 podman tmux)
-{{ else -}}
-plugins=(git kubectl kube-ps1 podman)
-{{ end }}
+plugins+=(tmux)
+{{- end }}
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
