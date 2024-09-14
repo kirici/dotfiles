@@ -79,6 +79,9 @@ plugins+=(podman)
 {{ if lookPath "tmux" -}}
 plugins+=(tmux)
 {{- end }}
+{{ if lookPath "direnv" -}}
+plugins+=(direnv)
+{{- end }}
 
 source $ZSH/oh-my-zsh.sh
 
