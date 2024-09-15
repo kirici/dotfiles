@@ -1,4 +1,4 @@
-{{ if stat (joinPath .chezmoi.homeDir ".var" "app" "org.wezfurlong.wezterm" ) -}}
+{{ if or (stat (joinPath .chezmoi.homeDir ".var" "app" "org.wezfurlong.wezterm" )) (lookPath "wezterm" ) -}}
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
