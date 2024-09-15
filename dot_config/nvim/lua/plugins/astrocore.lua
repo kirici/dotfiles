@@ -61,6 +61,13 @@ return {
         -- add alternative way to copy to system clipboard
         ["<leader>y"] = { '"+y', desc = "Copy to the + register" },
         ["<leader>Y"] = { '"+Y', desc = "Copy to the + register" },
+        -- center the screen vertically while scrolling and jumping between search results
+        ["<C-f>"] = "<C-f>zz",
+        ["<C-b>"] = "<C-b>zz",
+        ["<C-d>"] = "<C-d>zz",
+        ["<C-u>"] = "<C-u>zz",
+        ["n"] = "nzzzv",
+        ["N"] = "Nzzzv",
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
         -- ["<Leader>b"] = { desc = "Buffers" },
