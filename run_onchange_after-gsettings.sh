@@ -17,7 +17,7 @@ gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMonoNL N
 
 # Gnome shell
 gsettings set org.gnome.shell enabled-extensions "['background-logo@fedorahosted.org', 'Vitals@CoreCoding.com', 'clipboard-history@alexsaveau.dev', 'pano@elhan.io', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'search-light@icedman.github.com', 'tactile@lundal.io']"
-gsettings set org.gnome.shell favorite-apps "['io.github.ungoogled_software.ungoogled_chromium.desktop', 'code.desktop', 'org.wezfurlong.wezterm.desktop', 'org.gnome.Nautilus.desktop']"
+gsettings set org.gnome.shell favorite-apps "['io.github.ungoogled_software.ungoogled_chromium.desktop', 'code.desktop', 'kitty.desktop', 'org.gnome.Nautilus.desktop']"
 
 # Terminal
 profile=$(gsettings get org.gnome.Terminal.ProfilesList default | awk -F \' '{print $2}')
@@ -43,5 +43,5 @@ done
 # Shortcuts
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "'Terminal'"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "'/usr/bin/flatpak run org.wezfurlong.wezterm'"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "'/usr/bin/kitty'"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "'<Super>t'"
