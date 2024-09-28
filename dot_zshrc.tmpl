@@ -148,6 +148,12 @@ bindkey "\e[4~" end-of-line
 # default: WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 WORDCHARS='*?.~&;!#%^'
 
+# Oh-my-zsh plugin configuration
+KUBE_PS1_SYMBOL_ENABLE=false
+KUBE_PS1_SYMBOL_DEFAULT=$'\u2388 '
+KUBE_PS1_SYMBOL_COLOR=cyan
+KUBE_PS1_CTX_COLOR=white
+
 # Functions
 ## Automatically run ls after changing the current dir
 function list_all() {
