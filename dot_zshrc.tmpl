@@ -65,13 +65,12 @@ HYPHEN_INSENSITIVE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=()
+plugins+=(kube-ps1)
 {{ if lookPath "git" -}}
 plugins+=(git)
 {{- end }}
 {{ if lookPath "kubectl" -}}
 plugins+=(kubectl)
-plugins+=(kube-ps1)
 {{- end }}
 {{ if lookPath "podman" -}}
 plugins+=(podman)
