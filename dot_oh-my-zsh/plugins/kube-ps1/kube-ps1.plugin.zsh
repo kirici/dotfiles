@@ -223,7 +223,7 @@ _kube_ps1_update_cache() {
 
   if ! _kube_ps1_binary_check "${KUBE_PS1_BINARY}"; then
     # No ability to fetch context/namespace; display N/A.
-    KUBE_PS1_CONTEXT="BINARY-N/A"
+    KUBE_PS1_CONTEXT="N/A"
     KUBE_PS1_NAMESPACE="N/A"
     return
   fi
