@@ -115,9 +115,10 @@ export XDG_STATE_HOME="${HOME}/.local/state"
 export HISTORY_IGNORE="(l|c|pwd|exit|cd ..)"
 export GOPATH="${XDG_DATA_HOME}/go"
 # export GOMODCACHE="${XDG_CACHE_HOME}/go/pkg/mod"
-export PATH=$PATH:"${GOPATH}/bin"
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/.krew/bin
+PATH=$PATH:"${GOPATH}/bin"
+PATH=$PATH:$HOME/.local/bin
+PATH=$PATH:$HOME/.krew/bin
+export PATH
 
 # Exports, programs
 export PAGER="less -FRX"
