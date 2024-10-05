@@ -22,7 +22,7 @@
     "window.titleBarStyle": "custom",
     "workbench.startupEditor": "none",
     // Extensions
-    "workbench.colorTheme": "Tokyo Storm AltSynt",
+    "workbench.colorTheme": "Atom One Dark",
     "workbench.iconTheme": "material-icon-theme",
     "go.useLanguageServer": true,
     "gopls": {
@@ -39,7 +39,7 @@
     "indentRainbow.excludedLanguages": [
         "go"
     ],
-    "markdown-preview-github-styles.colorTheme": "light",
+    "markdown-preview-github-styles.colorTheme": "system",
     "gitlens.views.commitDetails.files.layout": "tree",
     "dev.containers.dockerPath": "podman",
     "docker.environment": {
