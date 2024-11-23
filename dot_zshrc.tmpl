@@ -181,7 +181,8 @@ if [ -z $SSH_AUTH_SOCK ] ; then
   ssh-add >/dev/null 2>&1
 fi
 {{-   else if eq .chezmoi.osRelease.id "fedora" }}
-# Completions without a plugin (yet)
+# Completions
+source <(kubectl completion zsh)
 source <(jj util completion zsh)
 {{-   end }}
 {{- end }}
