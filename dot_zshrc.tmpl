@@ -78,6 +78,9 @@ plugins+=(podman)
 {{ if lookPath "docker" -}}
 plugins+=(docker)
 {{- end }}
+{{ if lookPath "tofu" -}}
+plugins+=(opentofu)
+{{- end }}
 {{ if lookPath "tmux" -}}
 plugins+=(tmux)
 {{- end }}
