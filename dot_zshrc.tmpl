@@ -75,6 +75,9 @@ plugins+=(kubectl)
 {{ if lookPath "podman" -}}
 plugins+=(podman)
 {{- end }}
+{{ if lookPath "docker" -}}
+plugins+=(docker)
+{{- end }}
 {{ if lookPath "tmux" -}}
 plugins+=(tmux)
 {{- end }}
