@@ -4,6 +4,9 @@ tags: [ compression ]
 # To extract an uncompressed archive:
 tar -xvf /path/to/foo.tar
 
+# To compress a directory using zstd:
+tar -cf file.tar.zst -I 'zstd -T0 --long -16' /path/to/foo
+
 # To extract a .tar in specified directory:
 tar -xvf /path/to/foo.tar -C /path/to/destination/
 
