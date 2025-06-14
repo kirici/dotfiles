@@ -47,3 +47,6 @@ ffmpeg -ss -t -i $input -r $framerate -vf "crop=x_size:y_size:x_start:y_start,sc
 
 # Combine image and audio track to a video
 ffmpeg -loop 1 -i image.jpg -i audio.mp3 -c:a aac -c:v libx264 result.mp4
+
+# Sensible AV1
+ffmpeg -i input_video.mkv -c:v libsvtav1 -crf 30 output.mp4
