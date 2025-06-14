@@ -148,6 +148,7 @@ alias xh='xh -Fb'
 alias restish="noglob restish"
 alias v="nvim"
 alias k="kubectl"
+alias ea='eza --group-directories-first --no-permissions --icons --hyperlink -alo -s new'
 
 # Keybindings
 bindkey "\e[1~" beginning-of-line
@@ -173,6 +174,14 @@ function list_all() {
 if [[ ${chpwd_functions[(r)list_all]} != "list_all" ]];then
   chpwd_functions=(${chpwd_functions[@]} "list_all")
 fi
+
+## ssh wrap for local vms
+func ssh-trusted() {
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "${*}"
+}
+
+alias kubectl=kubecolor
+compdef kubecolor=kubectl
 
 {{- if eq .chezmoi.os "linux" }}
 {{   if eq .chezmoi.osRelease.id "ubuntu" -}}
