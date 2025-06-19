@@ -1,8 +1,0 @@
-# To get all key paths from a single document
-yq -o=props <file.yaml>
-
-# To split a multi-document into several files
-yq -s '"file_" + $index' <file.yaml>
-
-# To get all key paths from a multi document file
-yq e '.. | select(. == "*") | {(path | join(".")): .} ' <file.yaml>

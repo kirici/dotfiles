@@ -10,16 +10,16 @@ return {
   opts = {
     -- Configuration table of features provided by AstroLSP
     features = {
-      autoformat = true,      -- enable or disable auto formatting on start
-      codelens = true,        -- enable/disable codelens refresh on start
-      inlay_hints = false,    -- enable/disable inlay hints on start
+      autoformat = true, -- enable or disable auto formatting on start
+      codelens = true, -- enable/disable codelens refresh on start
+      inlay_hints = false, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
     },
     -- customize lsp formatting options
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = true,     -- enable or disable format on save globally
+        enabled = true, -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
         },
@@ -50,20 +50,20 @@ return {
             plugins = {
               -- formatter options
               autopep8 = {
-                enabled = false
+                enabled = false,
               },
               black = {
-                enabled = true
+                enabled = true,
               },
               yapf = {
-                enabled = false
+                enabled = false,
               },
               -- linter options
               pycodestyle = {
-                maxLineLength = 120
+                maxLineLength = 120,
               },
               pyflakes = {
-                enabled = true
+                enabled = true,
               },
               pylint = {
                 enabled = true,
@@ -73,19 +73,19 @@ return {
                 },
               },
               ruff = {
-                enabled = false
+                enabled = false,
               },
               -- type checker
               pylsp_mypy = {
-                enabled = false
+                enabled = false,
               },
               -- auto-completion options
               jedi_completion = {
-                enabled = false
+                enabled = false,
               },
               -- import sorting
               isort = {
-                enabled = true
+                enabled = true,
               },
             },
           },
@@ -96,18 +96,18 @@ return {
           gopls = {
             analyses = {
               fieldalignment = true,
-              nilness = true,      -- default: on
+              nilness = true, -- default: on
               shadow = true,
-              unreachable = true,  -- default: on
+              unreachable = true, -- default: on
               unusedparams = true, -- default: on
               unusedresult = true, -- default: on
               unusedvariable = true,
-              unusedwrite = true,  -- default: on
+              unusedwrite = true, -- default: on
               useany = true,
             },
             codelenses = {
               gc_details = true, -- gc choices
-              generate = true,   -- `go generate` preview
+              generate = true, -- `go generate` preview
               regenerate_cgo = true,
               test = true,
               tidy = true,
