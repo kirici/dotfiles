@@ -1,0 +1,1 @@
+kubectl label node $NODE node-role.kubernetes.io/worker=worker

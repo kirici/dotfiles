@@ -1,0 +1,1 @@
+rsync -hrvPt --inplace source/dir some/target/dir
