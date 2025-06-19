@@ -6,6 +6,7 @@ enabled=true
 
 [clipboard]
 enabled=true
+history_length=100
 persistent=true
 trigger=" "
 
