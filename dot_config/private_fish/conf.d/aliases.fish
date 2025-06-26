@@ -27,7 +27,7 @@ abbr --add -g glpa "git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)%
 abbr --add -g glpaf "git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)' --all --first-parent"
 
 if type -q fzf
-  abbr --add -g cdf "cd (dirname (fzf))"
+  abbr --add -g cdf "cd (fzf --walker=dir)"
 end
 
 if type -q kubectl
@@ -39,7 +39,7 @@ if type -q jj
 end
 
 if type -q eza
-  abbr --add -g ea "eza -alo --no-permissions --group-directories-first --icons"
-  abbr --add -g ean "eza -alo --no-permissions --group-directories-first --icons -r -s new"
-  abbr --add -g eas "eza -alo --no-permissions --group-directories-first --icons -r -s size"
+  abbr --add -g ea "eza -alo --no-permissions --group-directories-first --icons auto"
+  abbr --add -g ean "eza -alo --no-permissions --group-directories-first --icons auto -r -s new"
+  abbr --add -g eas "eza -alo --no-permissions --group-directories-first --icons auto -r -s size"
 end
