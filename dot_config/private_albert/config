@@ -1,6 +1,9 @@
 [General]
 telemetry=false
 
+[application]
+enabled=true
+
 [applications]
 enabled=true
 
