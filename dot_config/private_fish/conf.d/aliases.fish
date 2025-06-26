@@ -39,7 +39,7 @@ if type -q jj
 end
 
 if type -q eza
-  abbr --add -g ea "eza -alo --no-permissions --group-directories-first --icons auto"
-  abbr --add -g ean "eza -alo --no-permissions --group-directories-first --icons auto -r -s new"
-  abbr --add -g eas "eza -alo --no-permissions --group-directories-first --icons auto -r -s size"
+  abbr --add -g ea "eza -alo --no-permissions --group-directories-first --icons=auto"
+  abbr --add -g ean "eza -alo --no-permissions --group-directories-first --icons=auto -r -s=new"
+  abbr --add -g eas "eza -alo --no-permissions --group-directories-first --icons=auto -r -s=size"
 end
