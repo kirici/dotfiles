@@ -1,0 +1,1 @@
+podman run -it --rm --security-opt label=disable --mount=type=bind,source=/host/path,destination=/container/path,ro=true <image> <command>
