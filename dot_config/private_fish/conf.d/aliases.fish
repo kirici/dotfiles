@@ -4,16 +4,16 @@ if type -q bat
 end
 
 # TODO: split into separate files by command
-# Shortcuts
-abbr --add -g l "ls -vAhl --group-directories-first"
+# Shortcuts - general
 abbr --add -g c "clear"
+abbr --add -g ll "ls -vAhl"
+abbr --add -g ppsaft "podman ps -a --format 'table {{ .ID }}\t{{ printf \"%.20s\" .Names }}\t{{ printf \"%.60s\" .Image }}\t{{ .Status }}\t{{ .Ports }}'"
 abbr --add -g tree "tree -C --dirsfirst"
-abbr --add -g gst "git status"
-abbr --add -g gsw "git switch"
+# Shortcuts - git
 abbr --add -g gaa "git add --all ."
+abbr --add -g gcmsg "git commit --gpg-sign --message"
 abbr --add -g gd "git diff"
 abbr --add -g gds "git diff --staged"
-abbr --add -g gcmsg "git commit --gpg-sign --message"
 abbr --add -g ghist "git log --follow -p -U0 --ignore-all-space"
 abbr --add -g ghistt "git log --follow -p -U0 --ignore-all-space --ext-diff"
 abbr --add -g gla "git log --graph --all"
@@ -21,12 +21,16 @@ abbr --add -g glo "git log --oneline"
 abbr --add -g gloa "git log --oneline --all"
 abbr --add -g gloga "git log --oneline --graph --all"
 abbr --add -g glp "git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)'"
-abbr --add -g glps "git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)%n' --stat=80"
-abbr --add -g glpf "git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)' --first-parent"
 abbr --add -g glpa "git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)' --all"
 abbr --add -g glpaf "git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)' --all --first-parent"
+abbr --add -g glpf "git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)' --first-parent"
+abbr --add -g glps "git log --graph --pretty='format:%C(red)%h%C(reset)%C(auto)% D %C(reset)%C(normal)%C(bold)%s%C(reset) %C(reset)%C(cyan bold)<%an> %C(reset)%C(green)(%as)%C(reset)%n' --stat=80"
+abbr --add -g groot "cd (git rev-parse --show-toplevel)"
+abbr --add -g gst "git status"
+abbr --add -g gsw "git switch"
 
 if type -q fzf
+  # abbr --add -g cdf "cd (dirname (fzf --walker=dir))"
   abbr --add -g cdf "cd (fzf --walker=dir)"
 end
 
@@ -39,7 +43,13 @@ if type -q jj
 end
 
 if type -q eza
-  abbr --add -g ea "eza -alo --no-permissions --group-directories-first --icons=auto"
-  abbr --add -g ean "eza -alo --no-permissions --group-directories-first --icons=auto -r -s=new"
-  abbr --add -g eas "eza -alo --no-permissions --group-directories-first --icons=auto -r -s=size"
+  alias l "eza -alo --no-permissions --group-directories-first --icons auto"
+  alias lss "eza -alo --no-permissions --group-directories-first --icons auto -r -s size"
+  alias lsn "eza -alo --no-permissions --group-directories-first --icons auto -r -s new"
+  abbr --add -g lst "eza -lo --no-permissions --group-directories-first --icons auto --tree"
+  abbr --add -g lst2 "eza -lo --no-permissions --group-directories-first --icons auto --tree -L 2"
+  abbr --add -g lst3 "eza -lo --no-permissions --group-directories-first --icons auto --tree -L 3"
+  abbr --add -g lsta "eza -alo --no-permissions --group-directories-first --icons auto --tree"
+  abbr --add -g lsta2 "eza -alo --no-permissions --group-directories-first --icons auto --tree -L 2"
+  abbr --add -g lsta3 "eza -alo --no-permissions --group-directories-first --icons auto --tree -L 3"
 end
