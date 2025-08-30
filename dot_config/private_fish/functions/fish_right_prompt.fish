@@ -25,7 +25,6 @@ function fish_right_prompt
   # Move right prompt back up a line after newline of left prompt
   tput sc; tput cuu1; tput cuf 2
 
-  echo (fish_git_prompt)
   echo (kubectl_status)
 
   tput rc
