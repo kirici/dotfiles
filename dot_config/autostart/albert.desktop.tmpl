@@ -1,3 +1,4 @@
+{{ if eq .chezmoi.os "linux" -}}
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Categories=Utility;
@@ -12,4 +13,4 @@ Version=1.0
 MimeType=x-scheme-handler/albert
 # Give desktop environments time to init. Otherwise QGnomePlatform does not correctly pick up the palette.
 X-GNOME-Autostart-Delay=3
-
+{{ end -}}
