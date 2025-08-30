@@ -1,17 +1,19 @@
 [General]
+hotkey=Alt+L
+showTray=true
 telemetry=false
-
-[application]
-enabled=true
 
 [applications]
 enabled=true
 
+[bluetooth]
+enabled=true
+
 [clipboard]
 enabled=true
-history_length=100
 persistent=true
 trigger=" "
+history_length=100
 
 [snippets]
 enabled=true
