@@ -1,25 +1,40 @@
 # kirici's .files
 
-### Prerequisites
+# Usage
+
+### Prep
+
+Create a config file at e.g. `$HOME/.config/chezmoi/chezmoi.toml`
+
+```toml
+[data]
+  profile = "work"
+  email_work = "kirici@acme.org"
+  email_private = "kirici@example.com"
+  name_work = "Wile E. Coyote"
+  name_private = "kirici"
+  sshkey_work = "~/.ssh/id_rsa.pub"
+  sshkey_private = "~/.ssh/id_ed25519.pub"
+```
+
+### Apply
+
+```bash
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply kirici`
+```
+
+# Assumed setup
 
 Fedora 39+
-
-### Usage
 
 ```bash
 curl -sL bootstrap.kirici.io | bash
 ```
 
-This will run system and user setups, including syncing dotfiles via chezmoi.
+This will run system and user setups, including syncing dotfiles via chezmoi as above.
 
-If you'd like to run the same setups with a different dotfiles repo, you can use 
+To run the same setups with a different dotfiles repo:
 
 ```bash
 curl -sL bootstrap.kirici.io | GITHUB_USER=$USERNAME bash
-```
-
-### Dotfiles only
-
-```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply kirici`
 ```

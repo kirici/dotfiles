@@ -1,0 +1,10 @@
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+end
+
+# Disable greeting
+set fish_greeting ""
+{{ if eq .chezmoi.os "darwin" -}}
+ssh-add --apple-load-keychain $HOME/.ssh/id_rsa &>/dev/null
+ssh-add --apple-load-keychain $HOME/.ssh/mcs-initial-deploy.ed25519 &>/dev/null
+{{ end -}}

@@ -1,0 +1,1 @@
+ffmpeg -loop 1 -i <image> -i <audio> -c:a aac -c:v libx264 <output>

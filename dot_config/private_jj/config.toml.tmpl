@@ -1,8 +1,12 @@
 {{ if lookPath "jj" -}}
 [user]
-name = "kirici"
-email = "74684021+kirici@users.noreply.github.com"
-
+{{ if eq .profile "work" -}}
+name = {{ .name_work | quote }}
+email = {{ .email_work | quote }}
+{{ else -}}
+name = {{ .name_private | quote }}
+email = {{ .email_private | quote }}
+{{- end }}
 [ui]
 default-command = "status"
 editor = "nvim +star"
@@ -10,5 +14,15 @@ editor = "nvim +star"
 [signing]
 behavior = "own"
 backend = "ssh"
-key = "~/.ssh/id_ed25519.pub"
+{{ if eq .profile "work" -}}
+key = {{ .sshkey_work | quote }}
+{{ else -}}
+key = {{ .sshkey_private | quote }}
+{{- end }}
+[aliases]
+tug = ["bookmark", "move", "--from", "closest_bookmark(@)", "--to", "closest_pushable(@)"]
+
+[revset-aliases]
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+'closest_pushable(to)' = 'heads(::to & mutable() & ~description(exact:"") & (~empty() | merges()))'
 {{ end -}}

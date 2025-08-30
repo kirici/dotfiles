@@ -1,0 +1,1 @@
+ffmpeg -i <input.mkv> -c:v libsvtav1 -crf 30 <output.mp4>

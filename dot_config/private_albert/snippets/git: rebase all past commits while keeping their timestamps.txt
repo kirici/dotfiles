@@ -1,0 +1,1 @@
+git -c rebase.instructionFormat='%s%nexec GIT_COMMITTER_DATE="%cD" GIT_AUTHOR_DATE="%aD" git commit [-S] --amend --no-edit --reset-author' rebase [-i] [--root]

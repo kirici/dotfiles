@@ -14,3 +14,4 @@ return {
   { import = "astrocommunity.scrolling.neoscroll-nvim" },
   -- import/override with your plugins folder
 }
+

@@ -1,0 +1,1 @@
+kubectl -n $NS get pod $POD -o yaml | kubectl replace --force -f -

@@ -1,0 +1,1 @@
+yq '.. | select(. == "*") | {(path | join(".")): .} ' <file>

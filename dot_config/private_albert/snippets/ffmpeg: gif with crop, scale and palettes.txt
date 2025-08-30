@@ -1,0 +1,1 @@
+ffmpeg -ss -t -i $input -r $FRAMERATE -vf "crop=x_size:y_size:x_start:y_start,scale=x_size_other:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 <output.gif>
