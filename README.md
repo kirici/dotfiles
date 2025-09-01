@@ -13,8 +13,8 @@ Create a config file at e.g. `$HOME/.config/chezmoi/chezmoi.toml`
   email_private = "kirici@example.com"
   name_work = "Wile E. Coyote"
   name_private = "kirici"
-  sshkey_work = "~/.ssh/id_rsa.pub"
-  sshkey_private = "~/.ssh/id_ed25519.pub"
+  sshkey_work = "id_rsa"
+  sshkey_private = "id_ed25519"
 ```
 
 ### Apply

@@ -1,7 +1,13 @@
 [user]
-	email = 74684021+kirici@users.noreply.github.com
-	name = kirici
-	signingKey = /home/{{ .chezmoi.username }}/.ssh/id_ed25519
+{{ if eq .profile "work" }}
+	name = {{ .name_work | quote }}
+	email = {{ .email_work | quote }}
+	signingKey = /home/{{ .chezmoi.username }}/.ssh/{{ .sshkey_work }}
+{{ else -}}
+	name = {{ .name_private | quote }}
+	email = {{ .email_private | quote }}
+	signingKey = /home/{{ .chezmoi.username }}/.ssh/{{ .sshkey_private }}
+{{- end }}
 [fetch]
 	prune = true
 [core]
