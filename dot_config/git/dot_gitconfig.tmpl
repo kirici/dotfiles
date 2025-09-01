@@ -2,11 +2,11 @@
 {{ if eq .profile "work" }}
 	name = {{ .name_work | quote }}
 	email = {{ .email_work | quote }}
-	signingKey = /home/{{ .chezmoi.username }}/.ssh/{{ .sshkey_work }}
+	signingKey = "~/.ssh/{{ .sshkey_work }}"
 {{ else -}}
 	name = {{ .name_private | quote }}
 	email = {{ .email_private | quote }}
-	signingKey = /home/{{ .chezmoi.username }}/.ssh/{{ .sshkey_private }}
+	signingKey = "~/.ssh/{{ .sshkey_private }}"
 {{- end }}
 [fetch]
 	prune = true
@@ -19,7 +19,7 @@
 [commit]
 	gpgsign = true
 [gpg "ssh"]
-	allowedSignersFile = /home/{{ .chezmoi.username }}/.config/git/allowed_signers
+	allowedSignersFile = "~/.config/git/allowed_signers"
 [rerere]
 	enabled = true
 [diff]
