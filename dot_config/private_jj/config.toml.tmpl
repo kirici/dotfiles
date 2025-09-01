@@ -15,9 +15,9 @@ editor = "nvim +star"
 behavior = "own"
 backend = "ssh"
 {{ if eq .profile "work" -}}
-key = "/home/{{ .chezmoi.username }}/.ssh/{{ .sshkey_work }}.pub"
+key = "~/.ssh/{{ .sshkey_work }}.pub"
 {{ else -}}
-key = "/home/{{ .chezmoi.username }}/.ssh/{{ .sshkey_private }}.pub"
+key = "~/.ssh/{{ .sshkey_private }}.pub"
 {{- end }}
 [aliases]
 tug = ["bookmark", "move", "--from", "closest_bookmark(@)", "--to", "closest_pushable(@)"]
