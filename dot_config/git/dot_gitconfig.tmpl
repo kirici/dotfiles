@@ -1,9 +1,9 @@
 [user]
-{{ if eq .profile "work" }}
+{{- if eq .profile "work" }}
 	name = {{ .name_work | quote }}
 	email = {{ .email_work | quote }}
 	signingKey = "~/.ssh/{{ .sshkey_work }}"
-{{ else -}}
+{{ else }}
 	name = {{ .name_private | quote }}
 	email = {{ .email_private | quote }}
 	signingKey = "~/.ssh/{{ .sshkey_private }}"
