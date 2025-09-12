@@ -1,5 +1,6 @@
 set -gx EDITOR "nvim"
 set -gx PAGER "less -FRX"
+set -gx LESSHISTFILE "/dev/null"
 set -gx GIT_CONFIG_GLOBAL $XDG_CONFIG_HOME/git/.gitconfig
 
 set -gx XDG_CONFIG_HOME $HOME/.config
