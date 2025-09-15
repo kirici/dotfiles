@@ -20,7 +20,7 @@ Create a config file at e.g. `$HOME/.config/chezmoi/chezmoi.toml`
 ### Apply
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply kirici`
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply kirici
 ```
 
 # Assumed setup
