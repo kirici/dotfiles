@@ -1,0 +1,1 @@
+sqlite3 :memory: -cmd '.import -csv data.csv data' '.save data.sqlite

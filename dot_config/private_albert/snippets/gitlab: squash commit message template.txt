@@ -1,0 +1,11 @@
+Squash-merge of branch '%{source_branch}'
+
+%{description}
+
+%{all_commits}
+
+MR: '%{title}' (%{reference})
+
+%{approved_by}
+
+Merged-by: %{merged_by

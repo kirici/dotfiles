@@ -1,0 +1,1 @@
+kubectl get secrets cloud-config -o go-template='{{index .data "cloud.conf" | base64decode }}
