@@ -7,8 +7,10 @@ end
 # Shortcuts - general
 abbr --add -g c "clear"
 abbr --add -g ll "ls -vAhl"
+abbr --add -g history "history -R"
 abbr --add -g ppsaft "podman ps -a --format 'table {{ .ID }}\t{{ printf \"%.20s\" .Names }}\t{{ printf \"%.60s\" .Image }}\t{{ .Status }}\t{{ .Ports }}'"
 abbr --add -g tree "tree -C --dirsfirst"
+abbr --add -g opst "openstack"
 # Shortcuts - git
 abbr --add -g gaa "git add --all ."
 abbr --add -g gcmsg "git commit --gpg-sign --message"
