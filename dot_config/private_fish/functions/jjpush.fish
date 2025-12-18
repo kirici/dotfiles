@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 function jjpush
-  if test -f (jj root).pre-commit-config.yml
+  if test -f (jj root).pre-commit-config.yaml
     pre-commit run -a
     jj tug
     jj git push --tracked
