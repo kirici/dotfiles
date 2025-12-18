@@ -5,5 +5,8 @@ function jjpush
     pre-commit run -a
     jj tug
     jj git push --tracked
+    return
   end
+  jj tug
+  jj git push --tracked
 end
