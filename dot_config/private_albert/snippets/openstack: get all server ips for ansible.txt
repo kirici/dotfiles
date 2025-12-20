@@ -1,0 +1,1 @@
+openstack <--os-project-name m1234> server list -c Name -c Networks | rg -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | rg -v '^10\.' | sort | paste -s -d ',' -
