@@ -3,11 +3,10 @@ if type -q bat
   alias cat 'bat -pp'
 end
 
-# TODO: split into separate files by command
 # Shortcuts - general
 abbr --add -g c "clear"
 abbr --add -g ll "ls -vAhl"
-abbr --add -g history "history -R"
+abbr --add -g mktmp "cd (mktemp -d)"
 abbr --add -g ppsaft "podman ps -a --format 'table {{ .ID }}\t{{ printf \"%.20s\" .Names }}\t{{ printf \"%.60s\" .Image }}\t{{ .Status }}\t{{ .Ports }}'"
 abbr --add -g tree "tree -C --dirsfirst"
 abbr --add -g opst "openstack"
@@ -48,10 +47,11 @@ if type -q eza
   alias l "eza -alo --no-permissions --group-directories-first --icons auto"
   alias lss "eza -alo --no-permissions --group-directories-first --icons auto -r -s size"
   alias lsn "eza -alo --no-permissions --group-directories-first --icons auto -r -s new"
-  abbr --add -g lst "eza -lo --no-permissions --group-directories-first --icons auto --tree"
-  abbr --add -g lst2 "eza -lo --no-permissions --group-directories-first --icons auto --tree -L 2"
-  abbr --add -g lst3 "eza -lo --no-permissions --group-directories-first --icons auto --tree -L 3"
-  abbr --add -g lsta "eza -alo --no-permissions --group-directories-first --icons auto --tree"
-  abbr --add -g lsta2 "eza -alo --no-permissions --group-directories-first --icons auto --tree -L 2"
-  abbr --add -g lsta3 "eza -alo --no-permissions --group-directories-first --icons auto --tree -L 3"
+  abbr --add -g lst "eza -lo --no-permissions --group-directories-last --icons auto --tree"
+  abbr --add -g lst2 "eza -lo --no-permissions --group-directories-last --icons auto --tree -L 2"
+  abbr --add -g lst3 "eza -lo --no-permissions --group-directories-last --icons auto --tree -L 3"
+  abbr --add -g lsta "eza -alo --no-permissions --group-directories-last --icons auto --tree -I '.git|.jj|.direnv'"
+  abbr --add -g lsta2 "eza -alo --no-permissions --group-directories-last --icons auto --tree -I '.git|.jj|.direnv' -L 2"
+  abbr --add -g lsta3 "eza -alo --no-permissions --group-directories-last --icons auto --tree -I '.git|.jj|.direnv' -L 3"
+  abbr --add -g lstag "eza -alo --no-permissions --group-directories-last --icons auto --tree -I '.git|.jj|.direnv' --git-ignore"
 end

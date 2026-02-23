@@ -1,0 +1,19 @@
+{{- /* promptStringOnce reads the answer back from the already-rendered data map, so re-running
+       `chezmoi init` only asks for values that are still missing */ -}}
+{{- $name := promptStringOnce . "name" "Full name" -}}
+{{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $sshkey := promptStringOnce . "sshkey" "SSH key file name in ~/.ssh (without .pub)" "id_ed25519" -}}
+
+encryption: age
+age:
+    identities:
+    - {{ joinPath .chezmoi.homeDir ".ssh" $sshkey | quote }}
+    - ~/.ssh/id_ed25519.old
+    recipients:
+    - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPfSB/gIN8qBRK3yZdsqlsF+5SX+Q8WvQ3eGzpFBrBRK
+    - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICLRgMufjANa4oka5cc0oRs2evGxCklUmXWaDVuNIvkd
+    - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBrOblt31lj96vEylh7OduuoDkn4WAaO6xQ8YRA2vZBY
+data:
+    name: {{ $name | quote }}
+    email: {{ $email | quote }}
+    sshkey: {{ $sshkey | quote }}

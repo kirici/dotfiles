@@ -1,3 +1,0 @@
-for i in *.foo
-    mv -v -- $i (string replace -r '\.foo$' .bar $i)
-en

@@ -1,1 +1,9 @@
 README.md
+# Template:
+# {{ if not (lookPath "mycommand") }}/path/to/my/file{{ end }}
+{{ if not (lookPath "jj") }}.config/jj{{ end }}
+{{ if not (lookPath "kubectl") }}.config/fish/completions/kubectl.fish{{ end }}
+{{ if not (lookPath "kubecm") }}.config/fish/completions/kubecm.fish{{ end }}
+{{ if not (lookPath "kubectl") }}.config/fish/functions/kubectl.fish{{ end }}
+{{ if not (lookPath "openstack") }}.config/fish/functions/osctx.fish{{ end }}
+{{ if not (lookPath "fd") }}.config/fd/ignore{{ end }}

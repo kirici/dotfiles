@@ -1,13 +1,7 @@
 [user]
-{{- if eq .profile "work" }}
-	name = {{ .name_work | quote }}
-	email = {{ .email_work | quote }}
-	signingKey = "~/.ssh/{{ .sshkey_work }}"
-{{ else }}
-	name = {{ .name_private | quote }}
-	email = {{ .email_private | quote }}
-	signingKey = "~/.ssh/{{ .sshkey_private }}"
-{{- end }}
+	name = {{ .name | quote }}
+	email = {{ .email | quote }}
+	signingKey = "~/.ssh/{{ .sshkey }}"
 [fetch]
 	prune = true
 [core]

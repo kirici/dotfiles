@@ -1,1 +1,0 @@
-git blame -Mw -L <start>,<end> <file>

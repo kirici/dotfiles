@@ -1,12 +1,7 @@
-{{ if lookPath "jj" -}}
 [user]
-{{ if eq .profile "work" -}}
-name = {{ .name_work | quote }}
-email = {{ .email_work | quote }}
-{{ else -}}
-name = {{ .name_private | quote }}
-email = {{ .email_private | quote }}
-{{- end }}
+name = {{ .name | quote }}
+email = {{ .email | quote }}
+
 [ui]
 default-command = "status"
 editor = "nvim +star"
@@ -14,15 +9,7 @@ editor = "nvim +star"
 [signing]
 behavior = "own"
 backend = "ssh"
-{{ if eq .profile "work" -}}
-key = "~/.ssh/{{ .sshkey_work }}.pub"
-{{ else -}}
-key = "~/.ssh/{{ .sshkey_private }}.pub"
-{{- end }}
-[aliases]
-tug = ["bookmark", "move", "--from", "closest_bookmark(@)", "--to", "closest_pushable(@)"]
+key = "~/.ssh/{{ .sshkey }}.pub"
 
-[revset-aliases]
-'closest_bookmark(to)' = 'heads(::to & bookmarks())'
-'closest_pushable(to)' = 'heads(::to & mutable() & ~description(exact:"") & (~empty() | merges()))'
-{{ end -}}
+[aliases]
+la = ["log", "-r", "all()"]
