@@ -95,7 +95,6 @@ return {
         settings = {
           gopls = {
             analyses = {
-              fieldalignment = true,
               nilness = true, -- default: on
               shadow = true,
               unreachable = true, -- default: on

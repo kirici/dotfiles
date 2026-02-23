@@ -51,7 +51,7 @@ if type -q eza
   abbr --add -g lst "eza -lo --no-permissions --group-directories-first --icons auto --tree"
   abbr --add -g lst2 "eza -lo --no-permissions --group-directories-first --icons auto --tree -L 2"
   abbr --add -g lst3 "eza -lo --no-permissions --group-directories-first --icons auto --tree -L 3"
-  abbr --add -g lsta "eza -alo --no-permissions --group-directories-first --icons auto --tree"
-  abbr --add -g lsta2 "eza -alo --no-permissions --group-directories-first --icons auto --tree -L 2"
-  abbr --add -g lsta3 "eza -alo --no-permissions --group-directories-first --icons auto --tree -L 3"
+  abbr --add -g lsta "eza -alo --no-permissions --group-directories-first --icons auto --tree -I '.git|.jj|.direnv'"
+  abbr --add -g lsta2 "eza -alo --no-permissions --group-directories-first --icons auto --tree -I '.git|.jj|.direnv' -L 2"
+  abbr --add -g lsta3 "eza -alo --no-permissions --group-directories-first --icons auto --tree -I '.git|.jj|.direnv' -L 3"
 end
