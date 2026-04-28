@@ -48,12 +48,13 @@ if type -q eza
   alias l "eza -alo --no-permissions --group-directories-first --icons auto"
   alias lss "eza -alo --no-permissions --group-directories-first --icons auto -r -s size"
   alias lsn "eza -alo --no-permissions --group-directories-first --icons auto -r -s new"
-  abbr --add -g lst "eza -lo --no-permissions --group-directories-first --icons auto --tree"
-  abbr --add -g lst2 "eza -lo --no-permissions --group-directories-first --icons auto --tree -L 2"
-  abbr --add -g lst3 "eza -lo --no-permissions --group-directories-first --icons auto --tree -L 3"
-  abbr --add -g lsta "eza -alo --no-permissions --group-directories-first --icons auto --tree -I '.git|.jj|.direnv'"
-  abbr --add -g lsta2 "eza -alo --no-permissions --group-directories-first --icons auto --tree -I '.git|.jj|.direnv' -L 2"
-  abbr --add -g lsta3 "eza -alo --no-permissions --group-directories-first --icons auto --tree -I '.git|.jj|.direnv' -L 3"
+  abbr --add -g lst "eza -lo --no-permissions --group-directories-last --icons auto --tree"
+  abbr --add -g lst2 "eza -lo --no-permissions --group-directories-last --icons auto --tree -L 2"
+  abbr --add -g lst3 "eza -lo --no-permissions --group-directories-last --icons auto --tree -L 3"
+  abbr --add -g lsta "eza -alo --no-permissions --group-directories-last --icons auto --tree -I '.git|.jj|.direnv'"
+  abbr --add -g lsta2 "eza -alo --no-permissions --group-directories-last --icons auto --tree -I '.git|.jj|.direnv' -L 2"
+  abbr --add -g lsta3 "eza -alo --no-permissions --group-directories-last --icons auto --tree -I '.git|.jj|.direnv' -L 3"
+  abbr --add -g lsta "eza -alo --no-permissions --group-directories-last --icons auto --tree -I '.git|.jj|.direnv' --git-ignore"
 end
 
 # Replace in place
