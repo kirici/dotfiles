@@ -1,1 +1,1 @@
-truncate -s -1 fi
+truncate -s -1 file

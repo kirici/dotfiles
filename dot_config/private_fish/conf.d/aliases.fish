@@ -55,3 +55,6 @@ if type -q eza
   abbr --add -g lsta2 "eza -alo --no-permissions --group-directories-first --icons auto --tree -I '.git|.jj|.direnv' -L 2"
   abbr --add -g lsta3 "eza -alo --no-permissions --group-directories-first --icons auto --tree -I '.git|.jj|.direnv' -L 3"
 end
+
+# Replace in place
+abbr --add -g ':date' (date -Iseconds)
