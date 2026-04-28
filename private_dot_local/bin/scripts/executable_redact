@@ -1,0 +1,18 @@
+#!/usr/bin/env fish
+# set fish_trace 1
+
+if test (count $argv) -gt 0
+    cat $argv
+else
+    cat
+end \
+| begin
+    set -l cmd cat
+
+    for line in (cat ~/.config/redact.rules)
+        set -l parts (string split ' => ' $line)
+        set cmd "$cmd | sd -Fp '$parts[1]' '$parts[2]'"
+    end
+
+    eval $cmd
+end
