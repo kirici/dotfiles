@@ -8,9 +8,8 @@
 return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.lua" },
-  { import = "astrocommunity.editing-support.multiple-cursors-nvim" },
-  { import = "astrocommunity.editing-support.neogen" },
-  { import = "astrocommunity.editing-support.refactoring-nvim" },
+  { import = "astrocommunity.markdown-and-latex/render-markdown-nvim" },
   { import = "astrocommunity.scrolling.neoscroll-nvim" },
+  { import = "astrocommunity.editing-support.multiple-cursors-nvim" },
   -- import/override with your plugins folder
 }
