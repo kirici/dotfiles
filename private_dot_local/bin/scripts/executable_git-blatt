@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+show_commit() {
+    clear
+    git show HEAD~$current_index --color=always
+}
+
+current_index=0
+show_commit
+
+while true; do
+    read -rsn1 input  # Read key inputs without requiring return
+    case $input in
+        n)
+            ((current_index++))
+            show_commit
+            ;;
+        p)
+            if [ $current_index -gt 0 ]; then
+                ((current_index--))
+                show_commit
+            fi
+            ;;
+        q)
+            break
+            ;;
+    esac
+done

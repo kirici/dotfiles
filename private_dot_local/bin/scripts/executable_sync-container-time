@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+
+# fish: set -l date (date -Iseconds); and podman machine ssh "sudo date -s $date"
+podman machine ssh "sudo date -s $(date -Iseconds)" &>/dev/null
