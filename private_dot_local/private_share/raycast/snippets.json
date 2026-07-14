@@ -1,0 +1,143 @@
+[
+  {
+    "name": "kubectl all nodeports",
+    "text": "kubectl get svc -A -o go-template='{{range .items}}{{range.spec.ports}}{{if .nodePort}}{{.nodePort}}{{\"\\n\"}}{{end}}{{end}}{{end}}'"
+  },
+  {
+    "name": "kubectl get all namespaced resources in ns",
+    "text": "kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --ignore-not-found -n {cursor}"
+  },
+  {
+    "name": "kubectl clusters with projects",
+    "text": "kubectl get clusters -o custom-columns=CLUSTER-ID:.metadata.name,PROJECT-ID:.metadata.labels.project-id,HUMANREADABLE:.spec.humanReadableName,OWNER:.status.userEmail,VERSION:.spec.version,PHASE:.status.phase,PAUSED:.spec.pause,AGE:.metadata.creationTimestamp --sort-by .metadata.creationTimestamp"
+  },
+  {
+    "name": "kubectl go-template secret with embedded files",
+    "text": "go-template='{{ range $k, $v := .data }}# {{ $k }}{{ \"\\n---\\n\" }}{{ $v | base64decode }}{{ \"\\n\" }}{{ end }}'"
+  },
+  {
+    "name": "kubectl go-template secret key val",
+    "text": "go-template='{{ range $k, $v := .data }}{{ $k }}: {{ $v | base64decode }}{{ \"\\n\" }}{{ end }}'"
+  },
+  {
+    "name": "kubectl go-template secret by index",
+    "text": "go-template='{{index .data \"{cursor}\" | base64decode }}'"
+  },
+  {
+    "name": "kubectl label worker node",
+    "text": "kubectl label node {cursor} node-role.kubernetes.io/worker=worker"
+  },
+  {
+    "name": "kubectl replace pod",
+    "text": "kubectl get pod -n {cursor} -o yaml | kubectl replace --force -f -"
+  },
+  {
+    "name": "openstack servers comma-delimited",
+    "text": "openstack --os-project-name {cursor} server list -c Name -f value  | sort | paste -s -d ',' -"
+  },
+  {
+    "name": "fish batch mv rename",
+    "text": "for i in *.foo{cursor}\n    mv -v -- $i (string replace -r '\\.foo$' .bar $i)\nend"
+  },
+  {
+    "name": "git blame lines without moves",
+    "text": "git blame -Mw -L <start>,<end> <file>"
+  },
+  {
+    "name": "git rebase all past commits preserving timestamps",
+    "text": "git -c rebase.instructionFormat='%s%nexec GIT_COMMITTER_DATE=\"%cD\" GIT_AUTHOR_DATE=\"%aD\" git commit [-S] --amend --no-edit --reset-author' rebase [-i] [--root]"
+  },
+  {
+    "name": "ip addr grep addresses",
+    "text": "ip addr | grep -E '([0-9]{1,3}\\.){3}[0-9]{1,3}'"
+  },
+  {
+    "name": "openssl pipe to cert info",
+    "text": "| openssl x509 -text -noout"
+  },
+  {
+    "name": "openssl check expiry of domain",
+    "text": "echo | openssl s_client -connect <domain>{cursor}:443 2> /dev/null | \\\n        awk '/-----BEGIN/,/END CERTIFICATE-----/' | \\\n        openssl x509 -noout -enddate"
+  },
+  {
+    "name": "openstack server ips comma-delimited",
+    "text": "openstack server list -c Name -c Networks | rg -o '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' | rg -v '^10\\.' | sort | paste -s -d ',' -"
+  },
+  {
+    "name": "ctr@rke2 list local images",
+    "text": "/var/lib/rancher/rke2/bin/ctr --address /run/k3s/containerd/containerd.sock -n k8s.io image ls"
+  },
+  {
+    "name": "kubectl@rke2 usage",
+    "text": "/var/lib/rancher/rke2/bin/kubectl --kubeconfig=/etc/rancher/rke2/rke2.yaml"
+  },
+  {
+    "name": "sqlite csv to db",
+    "text": "sqlite3 :memory: -cmd '.import -csv data{cursor}.csv data' '.save data.sqlite'"
+  },
+  {
+    "name": "sqlite import csv to in-mem db",
+    "text": "sqlite3 :memory: -cmd '.import -csv file.csv tablename'"
+  },
+  {
+    "name": "truncate remove newline at eof",
+    "text": "truncate -s -1 file"
+  },
+  {
+    "name": "yq get key paths from multi-doc yaml",
+    "text": "yq '.. | select(. == \"*\") | {(path | join(\".\")): .} ' <file>"
+  },
+  {
+    "name": "yq split multi doc yaml into indexed files",
+    "text": "yq -s '\"file_\" + $index' <file>"
+  },
+  {
+    "name": "age encrypt with ssh key",
+    "text": "age --encrypt --recipients-file ~/.ssh/id_ed25519.pub -o output.age input"
+  },
+  {
+    "name": "age decrypt with ssh key",
+    "text": "age --decrypt --identity ~/.ssh/id_ed25519 -o output input.age"
+  },
+  {
+    "name": "ssh key fingerprint",
+    "text": "ssh-keygen -lf ~/.ssh/key"
+  },
+  {
+    "name": "age encrypt curl or cat public keys",
+    "text": "curl -s https://github.com/user.keys{cursor} | age -R - -o output input"
+  },
+  {
+    "name": "bash check port without external commands",
+    "text": "cat < /dev/null > /dev/tcp/mysvc[.namespace[.svc.cluster.local]]/8081; echo $?"
+  },
+  {
+    "name": "go build",
+    "text": "CGO_ENABLED=0 go build -ldflags='-s -w -extldflags \"-static\"' -o bin/",
+    "keyword": "golangbuild"
+  },
+  {
+    "name": "crictl@rke2 usage",
+    "text": "/var/lib/rancher/rke2/bin/crictl --config /var/lib/rancher/rke2/agent/etc/crictl.yaml ps"
+  },
+  {
+    "name": "grep ignore blank or starting with #",
+    "text": "grep -v '^$\\|^#{cursor}'"
+  },
+  {
+    "name": "kubectl node-shell fzf interactive",
+    "text": "kubectl node-shell (kubectl get nodes -o name | fzf)"
+  },
+  {
+    "name": "crictl logs by name",
+    "text": "crictl logs -f $(crictl ps | awk '/etcd{cursor}/{print $1}')"
+  },
+  {
+    "name": "yq deep-merge yaml docs",
+    "text": "yq eval-all '. as $item ireduce ({}; . *+ $item)' ...files"
+  },
+  {
+    "name": "jj mine not merged yet",
+    "text": "jj log -r 'mine()&all()~..trunk()'"
+  }
+]
