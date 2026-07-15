@@ -3,11 +3,9 @@ if type -q bat
   alias cat 'bat -pp'
 end
 
-# TODO: split into separate files by command
 # Shortcuts - general
 abbr --add -g c "clear"
 abbr --add -g ll "ls -vAhl"
-abbr --add -g history "history -R"
 abbr --add -g mktmp "cd (mktemp -d)"
 abbr --add -g ppsaft "podman ps -a --format 'table {{ .ID }}\t{{ printf \"%.20s\" .Names }}\t{{ printf \"%.60s\" .Image }}\t{{ .Status }}\t{{ .Ports }}'"
 abbr --add -g tree "tree -C --dirsfirst"
