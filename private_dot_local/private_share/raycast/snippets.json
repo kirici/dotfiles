@@ -24,6 +24,10 @@
     "text": "/var/lib/rancher/rke2/bin/crictl --config /var/lib/rancher/rke2/agent/etc/crictl.yaml ps"
   },
   {
+    "name": "ctr pull and run alpine",
+    "text": "ctr -n k8s.io image pull docker.io/library/alpine:latest; ctr -n k8s.io run --rm -t --net-host --mount type=bind,src=/root/,dst=/mnt/,options=rbind:rw docker.io/library/alpine:latest mypod ash"
+  },
+  {
     "name": "ctr@rke2 list local images",
     "text": "/var/lib/rancher/rke2/bin/ctr --address /run/k3s/containerd/containerd.sock -n k8s.io image ls"
   },
@@ -62,7 +66,11 @@
   },
   {
     "name": "kubectl clusters with projects",
-    "text": "kubectl get clusters -o custom-columns=CLUSTER-ID:.metadata.name,PROJECT-ID:.metadata.labels.project-id,HUMANREADABLE:.spec.humanReadableName,OWNER:.status.userEmail,VERSION:.spec.version,PHASE:.status.phase,PAUSED:.spec.pause,AGE:.metadata.creationTimestamp --sort-by .metadata.creationTimestamp"
+    "text": "kubectl get clusters -o custom-columns=CLUSTER-ID:.metadata.name,PROJECT-ID:.metadata.labels.project-id,CLUSTER-NAME:.spec.humanReadableName,OWNER:.status.userEmail,VERSION:.spec.version,PHASE:.status.phase,PAUSED:.spec.pause,AGE:.metadata.creationTimestamp --sort-by .metadata.creationTimestamp"
+  },
+  {
+    "name": "kubectl curl pod",
+    "text": "begin; set -lx pod debug-(date +%s); kubectl run --restart=Never --image=curlimages/curl $pod -- curl -fsSL {cursor} ; kubectl wait --for=create pod/$pod; kubectl logs --follow $pod; kubectl delete pod $pod; end"
   },
   {
     "name": "kubectl get all namespaced resources in ns",
@@ -87,6 +95,10 @@
   {
     "name": "kubectl node-shell fzf interactive",
     "text": "kubectl node-shell (kubectl get nodes -o name | fzf)"
+  },
+  {
+    "name": "kubectl port-forward in bg",
+    "text": "nohup kubectl port-forward {cursor} &>/dev/null &"
   },
   {
     "name": "kubectl replace pod",
